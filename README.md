@@ -8,6 +8,7 @@
 Changelog:
 
 * Project intialized with vue-cli.
+* Firebase initialized.
 * FireStore realtime database initialized.
 * Firebase hosting intialized.
 * 
