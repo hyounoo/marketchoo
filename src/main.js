@@ -3,21 +3,21 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import { auth } from './firebase'
-import { firestorePlugin } from 'vuefire'
+import './assets/scss/app.scss'
 
 Vue.config.productionTip = false
-Vue.use(firestorePlugin)
 
-let app: Vue
-auth.onAuthStateChanged((user) => {
-  if (user) {
-    store.dispatch('fetchUserProfile', user)
-  }
+let app
+auth.onAuthStateChanged(user => {
   if (!app) {
     app = new Vue({
       router,
       store,
-      render: (h) => h(App)
+      render: h => h(App)
     }).$mount('#app')
+  }
+
+  if (user) {
+    store.dispatch('fetchUserProfile', user)
   }
 })
