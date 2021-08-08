@@ -8,9 +8,9 @@
 Changelog:
 
 * Project intialized with vue-cli.
-*
-*
-*
+* FireStore realtime database initialized.
+* Firebase hosting intialized.
+* 
 ## Project setup
 ```
 npm install
