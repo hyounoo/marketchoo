@@ -147,10 +147,6 @@ export default {
     drawer: false,
     group: null,
 
-    // 아래 selectedItem는 페이지 이동 후 현재 페이지와 메뉴의 매칭(메뉴의 갯수 index기준)
-    // selectedItem: 0,
-    selectedItem: undefined,
-
     // for Dialog
     dialogm1: '',
     dialog: false,
