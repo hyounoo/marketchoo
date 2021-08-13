@@ -8,6 +8,14 @@ Vue.use(VueRouter)
 const routes = [
   {
     path: '/',
+    name: 'Wireframe',
+    component: () => import( /* webpackChunkName: "wireframe" */ '../views/Wireframe.vue'),
+    meta: {
+      requiresAuth: true
+    }
+  },
+  {
+    path: '/dashboard',
     name: 'Dashboard',
     component: Dashboard,
     meta: {
@@ -26,12 +34,7 @@ const routes = [
     meta: {
       requiresAuth: true
     }
-  },
-  {
-    path: '/wireframe',
-    name: 'Wireframe',
-    component: () => import( /* webpackChunkName: "wireframe" */ '../views/Wireframe.vue')
-  },
+  }
 ]
 
 const router = new VueRouter({
