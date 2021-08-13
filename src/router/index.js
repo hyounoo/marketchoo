@@ -8,6 +8,14 @@ Vue.use(VueRouter)
 const routes = [
   {
     path: '/',
+    name: 'Wireframe',
+    component: () => import( /* webpackChunkName: "wireframe" */ '../views/Wireframe.vue'),
+    meta: {
+      requiresAuth: true
+    }
+  },
+  {
+    path: '/dashboard',
     name: 'Dashboard',
     component: Dashboard,
     meta: {
