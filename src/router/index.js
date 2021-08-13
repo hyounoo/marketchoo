@@ -26,7 +26,12 @@ const routes = [
     meta: {
       requiresAuth: true
     }
-  }
+  },
+  {
+    path: '/wireframe',
+    name: 'Wireframe',
+    component: () => import( /* webpackChunkName: "wireframe" */ '../views/Wireframe.vue')
+  },
 ]
 
 const router = new VueRouter({
