@@ -116,22 +116,19 @@
     </v-app-bar>
 
     <v-main>
-      <!--  -->
-      <h2>heading2</h2>
-      <h3>heading3</h3>
-      <h4>heading4</h4>
+      <Main></Main>
     </v-main>
   </v-app>
 </template>
 
 <script>
-// import WireNav from "@/components/WireNav";
+import Main from "@/components/Main";
 
 export default {
-  // components: {
-  //   WireNav,
-  // },
   name: 'Wireframe',
+  components: {
+    Main,
+  },
   methods: {
     logout() {
       this.$store.dispatch("logout");
