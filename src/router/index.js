@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Dashboard from '../views/Dashboard.vue'
 import Main from '../views/Main.vue'
+import List from '../views/List.vue'
 import { auth } from '../firebase'
 
 Vue.use(VueRouter)
@@ -11,6 +12,11 @@ const routes = [
     path: '/',
     name: 'Main',
     component: Main
+  },
+  {
+    path: '/list',
+    name: 'List',
+    component: List
   },
   {
     path: '/dashboard',

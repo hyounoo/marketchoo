@@ -22,22 +22,19 @@
     </div>
 
     <!-- 상품 아이템 영역 -->
-    <div class="wrap-items">
-      <!-- 아래 props들은 UI를 위해 임시로 지정했을뿐 실제로 불필요시 제거해주세요 -->
-      <div v-if="posts.length">
-        <div v-for="post in posts" :key="post.id" class="post">
-          <Item 
-            v-bind:id="post.id"
-            v-bind:title="post.title"
-            v-bind:content="post.content"
-            v-bind:likes="post.likes"
-            >
-          </Item>
-        </div>
-      </div>
-      <div v-else>
-        <p class="no-results">There are currently no posts</p>
-      </div>
+    <div class="wrap-items" v-if="posts.length">
+      <Item 
+        v-for="post in posts" 
+        :key="post.id"
+        v-bind:id="post.id"
+        v-bind:title="post.title"
+        v-bind:content="post.content"
+        v-bind:likes="post.likes"
+      >
+      </Item>
+    </div>
+    <div class="wrap-items" v-else>
+      <p class="no-results">There are currently no posts</p>
     </div>
   </main>
 </template>

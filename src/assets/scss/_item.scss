@@ -1,4 +1,13 @@
 .v-application {
+  .wrap-items {
+    .product-item {
+      margin-top: 12px;
+
+      &:first-of-type {
+        margin-top: 0;
+      }
+    }
+  }
   .product-item {
     &__link {
       color: inherit;
