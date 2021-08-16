@@ -1,23 +1,26 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Dashboard from '../views/Dashboard.vue'
+import Main from '../views/Main.vue'
 import { auth } from '../firebase'
 
 Vue.use(VueRouter)
 
-const routes = [
+const routes = [  
   {
     path: '/',
-    name: 'Wireframe',
-    component: () => import( /* webpackChunkName: "wireframe" */ '../views/Wireframe.vue'),
-    meta: {
-      requiresAuth: true
-    }
+    name: 'Main',
+    component: Main
   },
   {
     path: '/dashboard',
     name: 'Dashboard',
-    component: Dashboard,
+    component: Dashboard
+  },
+  {
+    path: '/wireframe',
+    name: 'Wireframe',
+    component: () => import( /* webpackChunkName: "wireframe" */ '../views/Wireframe.vue'),
     meta: {
       requiresAuth: true
     }

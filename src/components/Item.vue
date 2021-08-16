@@ -6,7 +6,7 @@
       max-width="100%"
       max-height="600"
     ></v-img> -->
-    <a href="/product/32">
+    <a v-bind:href="'/product/'+ id">
       <v-img
         :lazy-src="imgItem"
         :src="imgItem"
@@ -18,8 +18,8 @@
     <div class="product-item__bottom">
       <v-card-text>
         <a href="/product/32" class="product-item__link">
-          <h2 class="text-h6 primary--text">{{ itemName }}</h2>
-          {{ itemDesc }}
+          <h2 class="text-h6 primary--text">{{ title }}</h2>
+          {{ content | trimLength }}
         </a>
       </v-card-text>
       <v-card-actions>
@@ -31,6 +31,8 @@
 
           <!-- After - 좋아요 -->
           <!-- <v-icon color="red">mdi-heart</v-icon> -->
+
+          {{ likes + 'likes'}}
         </v-btn>
 
         <!-- 아래 버튼은 필요할 경우 사용 -->
@@ -47,12 +49,14 @@
 
 <script>
 import imgItem from "@/assets/img/@item.jpg";
+import moment from 'moment'
 
 export default {
   props: [
-    'itemName',
-    'itemDesc',
-    'itemTarget',
+    'id',
+    'title',
+    'content',
+    'likes'
   ],
   data: () => ({
     imgItem
@@ -60,5 +64,17 @@ export default {
   methods: {
     //
   },
+  filters: {
+    formatDate(val) {
+      if (!val) { return '-' }
+
+      let date = val.toDate()
+      return moment(date).fromNow()
+    },
+    trimLength(val) {
+      if (val.length < 20) { return val }
+      return `${val.substring(0, 20)}...`
+    }
+  }
 }
 </script>
