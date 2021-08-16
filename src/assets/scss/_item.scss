@@ -1,0 +1,11 @@
+.v-application {
+  .product-item {
+    &__link {
+      color: inherit;
+    }
+    &__bottom {
+      display: flex;
+      justify-content: space-between;
+    }
+  }
+}

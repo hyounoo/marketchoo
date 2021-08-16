@@ -1,0 +1,15 @@
+.wrap-title {
+  display: flex;
+  justify-content: space-between;
+  margin: 20px 0 10px;
+
+  .title-value {
+    margin: 0;
+  }
+  .box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 50px;
+  }
+}
