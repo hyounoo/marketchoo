@@ -119,7 +119,7 @@
       </div>
     </v-navigation-drawer>
 
-    <v-app-bar app >
+    <v-app-bar color="blue" app>
       <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
 
       <v-toolbar-title>
@@ -127,6 +127,8 @@
           <h3>MarketChoo</h3>
         </router-link>
       </v-toolbar-title>
+
+      <div class="right" style="width: 36px;"></div>
     </v-app-bar>
 
     <v-main>
@@ -135,17 +137,17 @@
       </v-container>
     </v-main>
 
-    <v-footer>
-      Footer
-    </v-footer>
+    <Footer></Footer>
   </v-app>
 </template>
 
 <script>
 import { mapState } from 'vuex'
+import Footer from '@/components/Footer';
 
 export default {
   components: {
+    Footer,
   },
   data: () => ({ 
     drawer: false,
