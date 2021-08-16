@@ -11,6 +11,7 @@
           <div class="create-post">
             <p>create a post</p>
             <form @submit.prevent>
+              <input v-model.trim="post.title"/>
               <textarea v-model.trim="post.content"></textarea>
               <button @click="createPost()" :disabled="post.content === ''" class="button">post</button>
             </form>
@@ -76,6 +77,7 @@ export default {
   data() {
     return {
       post: {
+        title: '',
         content: ''
       },
       showCommentModal: false,
@@ -90,7 +92,8 @@ export default {
   },
   methods: {
     createPost() {
-      this.$store.dispatch('createPost', { content: this.post.content })
+      this.$store.dispatch('createPost', { title: this.post.title, content: this.post.content })
+      this.post.title = ''
       this.post.content = ''
     },
     toggleCommentModal(post) {
