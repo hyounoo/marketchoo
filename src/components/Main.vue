@@ -12,18 +12,28 @@
       </a>
     </div>
 
-    <div class="asdf">
-      <h2 class="sub-title">Market Choo Best</h2>
-      <a href="#더보기" class="more">더보기</a>
+    <!-- Best상품 타이틀 영역 -->
+    <div class="wrap-title">
+      <div class="left box"></div>
+      <h2 class="title-value">Market Choo Best</h2>
+      <div class="right box">
+        <a href="#더보기" class="more">더보기</a>
+      </div>
     </div>
 
+    <!-- 상품 아이템 영역 -->
     <div class="wrap-items">
+      <!-- 아래 props들은 UI를 위해 임시로 지정했을뿐 실제로 불필요시 제거해주세요 -->
       <Item 
-        itemName="아이템#1 이름"
-        itemDesc="아이템#1 설명설명"
+        itemName="정공법 선크림"
+        itemDesc="적폐의 자외선으로부터 민생을 지킬 수 있어요!"
         itemTarget="/product/32">
       </Item>
-      <!-- <Item itemName="아이템#25 이름" itemDesc="아이템#25 설명설명"></Item> -->
+      <!-- <Item 
+        itemName="상품 이름"
+        itemDesc="상품 설명설명 설명설명 설명설명"
+        itemTarget="/product/33">
+      </Item> -->
     </div>
   </main>
 </template>
