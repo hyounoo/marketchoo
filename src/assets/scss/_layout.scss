@@ -74,9 +74,13 @@
       margin: 0 auto;
     }
 
+    .button {
+      margin-bottom: 0.5rem;
+    }
+
     .extras {
-      float: right;
       text-align: right;
+      margin-bottom: 0.5rem;
 
       a {
         display: block;
@@ -91,6 +95,16 @@
 
       p {
         margin-bottom: 2rem;
+      }
+    }
+
+    .external-signIn {
+      
+      text-align: center;
+
+      a {
+        display: block;
+        margin-bottom: 0.5rem;
       }
     }
   }
