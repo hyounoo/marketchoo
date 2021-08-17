@@ -1,43 +1,19 @@
 <template>
-  <main class="wrap-main">
-    <!-- 관리자에서 불러온 메인배너(상단) -->
-    <div class="wrap-main__banner">
-      <a href="#bannerTarget" class="link">
-        <v-img
-          lazy-src="https://picsum.photos/id/11/12/6.webp?random=1"
-          src="https://picsum.photos/id/11/1200/600.webp?random=1"
-          max-width="100%"
-          max-height="600"
-        ></v-img>
-      </a>
-    </div>
-
-    <!-- Best상품 타이틀 영역 -->
-    <div class="wrap-title">
-      <div class="left box"></div>
-      <h2 class="title-value">Market Choo Best</h2>
-      <div class="right box">
-        <a href="/list" class="more">더보기</a>
-      </div>
-    </div>
-
-    <!-- 상품 아이템 영역 -->
-    <div class="wrap-items" v-if="bestPosts">
-      <Item 
-        v-for="post in bestPosts" 
-        :key="post.id"
-        v-bind:id="post.id"
-        v-bind:title="post.title"
-        v-bind:content="post.content"
-        v-bind:likes="post.likes"
-        v-bind:comments="post.comments"
-      >
-      </Item>
-    </div>
-    <div class="wrap-items" v-else>
-      <p class="no-results">There are currently no posts</p>
-    </div>
-  </main>
+  <!-- 상품 아이템 영역 -->
+  <div class="wrap-items" v-if="posts.length">
+    <Item 
+      v-for="post in posts" 
+      :key="post.id"
+      v-bind:id="post.id"
+      v-bind:title="post.title"
+      v-bind:content="post.content"
+      v-bind:likes="post.likes"
+    >
+    </Item>
+  </div>
+  <div class="wrap-items" v-else>
+    <p class="no-results">There are currently no posts</p>
+  </div>
 </template>
 
 <script>
@@ -49,7 +25,7 @@ import CommentModal from '@/components/CommentModal'
 
 export default {
   components: {
-    Item
+    Item,
   },
   data: () => ({
     post: {
@@ -62,7 +38,7 @@ export default {
       postComments: []
   }),
   computed: {
-    ...mapState(['userProfile', 'bestPosts'])
+    ...mapState(['userProfile', 'posts'])
   },
   methods: {
     createPost() {

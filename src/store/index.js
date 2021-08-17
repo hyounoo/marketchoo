@@ -5,6 +5,9 @@ import router from '../router/index'
 
 Vue.use(Vuex)
 
+// TODO: change this to role based authentication using firestore auth api
+const admins = ['hyounoosung@gmail.com', 'good617boy@gmail.com']
+
 // realtime firebase
 fb.postsCollection.orderBy('createdOn', 'desc').onSnapshot(snapshot => {
   let postsArray = []
@@ -19,12 +22,30 @@ fb.postsCollection.orderBy('createdOn', 'desc').onSnapshot(snapshot => {
   store.commit('setPosts', postsArray)
 })
 
+fb.postsCollection.orderBy('likes', 'desc').limit(3).onSnapshot(snapshot => {
+  let postsArray = []
+
+  snapshot.forEach(doc => {
+    let post = doc.data()
+    post.id = doc.id
+
+    postsArray.push(post)
+  })
+
+  store.commit('setBestPosts', postsArray)
+})
+
 const store = new Vuex.Store({
   state: {
+    isAdmin: false,
     userProfile: {},
-    posts: []
+    posts: [],
+    bestPosts: []
   },
   mutations: {
+    setIsAdmin(state, val) {
+      state.isAdmin = val
+    },
     setUserProfile(state, val) {
       state.userProfile = val
     },
@@ -33,6 +54,9 @@ const store = new Vuex.Store({
     },
     setPosts(state, val) {
       state.posts = val
+    },
+    setBestPosts(state, val) {
+      state.bestPosts = val
     }
   },
   actions: {
@@ -57,6 +81,12 @@ const store = new Vuex.Store({
       dispatch('fetchUserProfile', user)
     },
     async fetchUserProfile({ commit }, user) {
+      // check isAdmin
+      const currentUserEmail = await fb.auth.currentUser.email
+      if (admins.includes(currentUserEmail)) {
+        commit('setIsAdmin', true)
+      }
+
       // fetch user profile
       const userProfile = await fb.usersCollection.doc(user.uid).get()
 

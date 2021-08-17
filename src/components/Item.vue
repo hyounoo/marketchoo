@@ -31,10 +31,20 @@
 
           <!-- After - 좋아요 -->
           <!-- <v-icon color="red">mdi-heart</v-icon> -->
-
-          {{ likes + 'likes'}}
         </v-btn>
+        <dl>
+          <dt class="hidden">좋아요 카운트</dt>
+          <dd>{{ likes }}</dd>
+        </dl>
+        
 
+        <v-btn icon x-large>
+          <v-icon>mdi-comment</v-icon>
+        </v-btn>
+        <dl>
+          <dt class="hidden">커멘트 카운트</dt>
+          <dd>{{ comments }}</dd>
+        </dl>
         <!-- 아래 버튼은 필요할 경우 사용 -->
         <!-- <v-btn icon x-large>
           <v-icon>mdi-bookmark</v-icon>
@@ -56,7 +66,8 @@ export default {
     'id',
     'title',
     'content',
-    'likes'
+    'likes',
+    'comments'
   ],
   data: () => ({
     imgItem

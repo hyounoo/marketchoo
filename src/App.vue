@@ -106,6 +106,15 @@
                 <v-list-item-title v-text="'설정'"></v-list-item-title>
               </v-list-item-content>
             </v-list-item>
+
+            <v-list-item v-if="this.isAdmin" href="/dashboard">
+              <v-list-item-icon>
+                <v-icon v-text="'mdi-cog'"></v-icon>
+              </v-list-item-icon>
+              <v-list-item-content>
+                <v-list-item-title v-text="'어드민 대시보드'"></v-list-item-title>
+              </v-list-item-content>
+            </v-list-item>
             
           </v-list-item-group>
         </v-list>
@@ -119,7 +128,7 @@
       </div>
     </v-navigation-drawer>
 
-    <v-app-bar app >
+    <v-app-bar color="blue" app>
       <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
 
       <v-toolbar-title>
@@ -127,6 +136,8 @@
           <h3>MarketChoo</h3>
         </router-link>
       </v-toolbar-title>
+
+      <div class="right" style="width: 36px;"></div>
     </v-app-bar>
 
     <v-main>
@@ -135,17 +146,17 @@
       </v-container>
     </v-main>
 
-    <v-footer>
-      Footer
-    </v-footer>
+    <Footer></Footer>
   </v-app>
 </template>
 
 <script>
 import { mapState } from 'vuex'
+import Footer from '@/components/Footer';
 
 export default {
   components: {
+    Footer,
   },
   data: () => ({ 
     drawer: false,
@@ -156,10 +167,10 @@ export default {
     dialog: false,
   }),
   computed: {
-    ...mapState(['userProfile']),
+    ...mapState(['isAdmin', 'userProfile']),
     signedIn() {
       return Object.keys(this.userProfile).length > 1
-    }
+    },
   },
   watch: {
     group () {

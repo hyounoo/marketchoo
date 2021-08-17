@@ -13,3 +13,13 @@
     min-width: 50px;
   }
 }
+.hidden {
+  overflow: hidden;
+  visibility: hidden;
+  position: absolute;
+  z-index: -1;
+  top: -1px;
+  width: 1px;
+  height: 1px;
+  font-size: 0;
+}

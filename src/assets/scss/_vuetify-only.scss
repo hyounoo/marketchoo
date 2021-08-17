@@ -1,7 +1,9 @@
 .v-application {
   &--wrap {
     .v-main {
+      margin: 0 auto;
       padding-left: 0 !important;
+      // max-width: 1200px;
     }
   }
 }
