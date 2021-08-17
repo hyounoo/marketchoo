@@ -17,19 +17,20 @@
       <div class="left box"></div>
       <h2 class="title-value">Market Choo Best</h2>
       <div class="right box">
-        <a href="#더보기" class="more">더보기</a>
+        <a href="/list" class="more">더보기</a>
       </div>
     </div>
 
     <!-- 상품 아이템 영역 -->
-    <div class="wrap-items" v-if="posts.length">
+    <div class="wrap-items" v-if="bestPosts">
       <Item 
-        v-for="post in posts" 
+        v-for="post in bestPosts" 
         :key="post.id"
         v-bind:id="post.id"
         v-bind:title="post.title"
         v-bind:content="post.content"
         v-bind:likes="post.likes"
+        v-bind:comments="post.comments"
       >
       </Item>
     </div>
@@ -48,7 +49,7 @@ import CommentModal from '@/components/CommentModal'
 
 export default {
   components: {
-    Item,
+    Item
   },
   data: () => ({
     post: {
@@ -61,7 +62,7 @@ export default {
       postComments: []
   }),
   computed: {
-    ...mapState(['userProfile', 'posts'])
+    ...mapState(['userProfile', 'bestPosts'])
   },
   methods: {
     createPost() {
