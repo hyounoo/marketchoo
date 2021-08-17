@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import * as firebase from 'firebase/app'
 import * as fb from '../firebase'
 import router from '../router/index'
 
@@ -80,7 +81,16 @@ const store = new Vuex.Store({
       // fetch user profile and set in state
       dispatch('fetchUserProfile', user)
     },
-    async fetchUserProfile({ commit }, user) {
+    async googleSignIn({ commit }, form) {
+      const provider = new firebase.auth.GoogleAuthProvider()
+      provider.addScope('profile');
+      provider.addScope('email');
+      var result = await fb.auth.signInWithPopup(provider)
+      
+      // log user out
+      // await fb.auth.signOut()      
+    },
+    async fetchUserProfile({ commit, dispatch }, user) {
       // check isAdmin
       const currentUserEmail = await fb.auth.currentUser.email
       if (admins.includes(currentUserEmail)) {
@@ -90,12 +100,25 @@ const store = new Vuex.Store({
       // fetch user profile
       const userProfile = await fb.usersCollection.doc(user.uid).get()
 
-      // set user profile in state
-      commit('setUserProfile', userProfile.data())
+      console.log('userProfile.data(): ', userProfile.data())
+      if (userProfile.data() !== undefined) {
+        // set user profile in state
+        commit('setUserProfile', userProfile.data())
 
-      // change route to dashboard
-      if (router.currentRoute.path === '/login') {
-        router.push('/')
+        // change route to dashboard
+        if (router.currentRoute.path === '/login') {
+          router.push('/')
+        }
+      } else {
+        console.log('should create a user')
+        // create user object in userCollections
+        await fb.usersCollection.doc(user.uid).set({
+          name: '',
+          title: ''
+        })
+
+        // fetch user profile and set in state
+        dispatch('fetchUserProfile', user)
       }
     },
     async logout({ commit }) {
