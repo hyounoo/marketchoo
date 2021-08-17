@@ -12,16 +12,19 @@ const routes = [
     path: '/',
     name: 'Main',
     component: Main
+  },  
+  {
+    path: '/dashboard',
+    name: 'Dashboard',
+    component: Dashboard,
+    meta: {
+      requiresAdmin: true
+    }
   },
   {
     path: '/list',
     name: 'List',
     component: List
-  },
-  {
-    path: '/dashboard',
-    name: 'Dashboard',
-    component: Dashboard
   },
   {
     path: '/wireframe',
@@ -52,14 +55,22 @@ const router = new VueRouter({
   routes
 })
 
+// TODO: change this to role based authentication using firestore auth api
+const admins = ['hyounoosung@gmail.com', 'good617boy@gmail.com']
+
 // navigation guard to check for logged in users
 router.beforeEach((to, from, next) => {
   const requiresAuth = to.matched.some(x => x.meta.requiresAuth)
+  const requiresAdmin = to.matched.some(x => x.meta.requiresAdmin)
 
   if (requiresAuth && !auth.currentUser) {
     next('/login')
   } else {
-    next()
+    if (requiresAdmin && !admins.includes(auth.currentUser.email)) {
+      next('/')
+    } else {
+      next()
+    }
   }
 })
 
