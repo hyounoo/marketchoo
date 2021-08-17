@@ -6,8 +6,8 @@
     ></PasswordReset>
     <section>
       <div class="col1">
-        <h1>MARKET CHOO</h1>
-        <p>Welcome to MARKET CHOO</p>
+        <h1>Market Choo</h1>
+        <p>Welcome to Market Choo</p>
       </div>
       <div :class="{ 'signup-form': !showLoginForm }" class="col2">
         <form v-if="showLoginForm" @submit.prevent>
@@ -35,6 +35,12 @@
             <a @click="togglePasswordReset()">Forgot Password</a>
             <a @click="toggleForm()">Create an Account</a>
           </div>
+          <div class="external-signIn">
+            or
+          </div>
+          <button @click="googleSignIn">
+            Sign In with Google
+          </button>
         </form>
         <form v-else @submit.prevent>
           <h1>Get Started</h1>
@@ -128,6 +134,9 @@ export default {
         title: this.signupForm.title,
       });
     },
+    googleSignIn() {
+      this.$store.dispatch("googleSignIn")
+    }
   },
 };
 </script>
