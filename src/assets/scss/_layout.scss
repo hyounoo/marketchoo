@@ -1,38 +1,21 @@
-// navigation
-header {
-  position: relative;
-  background: $white;
-  box-shadow: 0 0 5px 0 rgba($dark, 0.5);
-  z-index: 10;
+// Header (v-app-bar)
+.v-application {
+  .v-app-bar {
+    .v-toolbar__content {
+      justify-content: space-between;
 
-  h3 {
-    display: inline-block;
-  }
-
-  ul {
-    float: right;
-    text-align: right;
-
-    li {
-      margin-top: 4px;
-      margin-left: 6px;
-
+      // .v-app-bar__nav-icon {
+      //   position: absolute;
+      //   top: 0;
+      //   left: 0;
+      // }
+    }
+    &.blue {
+      color: #fff;
+      
       a {
-        display: block;
-        padding: 5px;
+        color: inherit;
       }
-    }
-  }
-
-  @media screen and (max-width: 742px) {
-    h3 {
-      display: block;
-      text-align: center;
-    }
-
-    ul {
-      float: none;
-      text-align: center;
     }
   }
 }
@@ -406,10 +389,4 @@ header {
   .button {
     margin-top: 2rem;
   }
-}
-
-// root app
-#app {
-  margin: 0 auto;
-  max-width: 1200px;
 }
