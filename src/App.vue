@@ -106,6 +106,15 @@
                 <v-list-item-title v-text="'설정'"></v-list-item-title>
               </v-list-item-content>
             </v-list-item>
+
+            <v-list-item v-if="this.isAdmin" href="/dashboard">
+              <v-list-item-icon>
+                <v-icon v-text="'mdi-cog'"></v-icon>
+              </v-list-item-icon>
+              <v-list-item-content>
+                <v-list-item-title v-text="'어드민 대시보드'"></v-list-item-title>
+              </v-list-item-content>
+            </v-list-item>
             
           </v-list-item-group>
         </v-list>
@@ -158,10 +167,10 @@ export default {
     dialog: false,
   }),
   computed: {
-    ...mapState(['userProfile']),
+    ...mapState(['isAdmin', 'userProfile']),
     signedIn() {
       return Object.keys(this.userProfile).length > 1
-    }
+    },
   },
   watch: {
     group () {
