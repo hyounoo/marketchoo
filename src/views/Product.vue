@@ -92,38 +92,46 @@
     </v-row>
 
     <!-- 상세정보 -->
-    <div id="productDetail">
-      <h3 class="text-h6">상세정보</h3>
-      <v-divider class="mb-3"></v-divider>
-      <div style="margin: 0 0 40px;">내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용</div>
-      <div style="margin: 40px 0;">내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용</div>
-      <div style="margin: 40px 0;">내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용</div>
-      <div style="margin: 40px 0;">내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용</div>
-      <div style="margin: 40px 0;">내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용</div>
-      <div style="margin: 40px 0;">내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용</div>
-      <div style="margin: 40px 0;">내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용</div>
-      <div style="margin: 40px 0;">내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용</div>
-    </div>
+    <div v-if="productInfo">
+      <div id="productDetail" v-if="post">
+        <h3 class="text-h6">상세정보</h3>
+        <h3 class="text-h6">{{ post.title }}</h3>
+        <v-divider class="mb-3"></v-divider>
 
+        <!-- please move style to scss -->
+        <pre style="margin: 0 0 40px">
+          {{ post.content }}
+        </pre>
+
+        <!-- recent comments limit 3 -->
+        <!-- <div v-show="recentComments.length" id="productReview" class="comments">
+          <h3 class="text-h6">고객리뷰</h3>
+          <v-divider class="mb-3"></v-divider>
+          <div v-for="comment in recentComments" :key="comment.id" class="comment">
+            <p>{{ comment.userName }}</p>
+            <span>{{ comment.createdOn | formatDate }}</span>
+            <p>{{ comment.content }}</p>
+          </div>
+        </div> -->
+      </div>
+    </div>
     <!-- 고객리뷰 -->
-    <div id="productReview">
-      <h3 class="text-h6">고객리뷰</h3>
-      <v-divider class="mb-3"></v-divider>
-      <div style="margin: 0 0 40px;">내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용</div>
-      <div style="margin: 40px 0;">내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용</div>
-      <div style="margin: 40px 0;">내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용</div>
-      <div style="margin: 40px 0;">내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용</div>
-      <div style="margin: 40px 0;">내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용</div>
-      <div style="margin: 40px 0;">내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용</div>
-      <div style="margin: 40px 0;">내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용</div>
-      <div style="margin: 40px 0;">내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용</div>
+    <div v-else>
+      <div v-show="postComments.length" id="productReview" class="comments">
+        <h3 class="text-h6">고객리뷰</h3>
+        <v-divider class="mb-3"></v-divider>
+        <div v-for="comment in postComments" :key="comment.id" class="comment">
+          <p>{{ comment.userName }}</p>
+          <span>{{ comment.createdOn | formatDate }}</span>
+          <p>{{ comment.content }}</p>
+        </div>
+      </div>
     </div>
-
     <!-- <v-row style="position: sticky;top: 56px;"> -->
     <v-row class="mb-1" style="position: sticky;bottom: 0;">
       <v-tabs background-color="indigo" fixed-tabs dark>
-        <v-tab href="#productDetail" @click="$vuetify.goTo('#productDetail', {})">상세정보</v-tab>
-        <v-tab href="#productReview" @click="$vuetify.goTo('#productReview', {})">고객리뷰</v-tab>
+        <v-tab href="#productDetail" @click="() => this.productInfo = true">상세정보</v-tab>
+        <v-tab href="#productReview" @click="() => this.productInfo = false">고객리뷰</v-tab>
       </v-tabs>
     </v-row>
   </v-card>
@@ -132,7 +140,7 @@
 
 <script>
 import imgItem from "@/assets/img/@item.jpg";
-import { commentsCollection } from '@/firebase'
+import { postsCollection, commentsCollection } from '@/firebase'
 import { mapState } from 'vuex'
 import moment from 'moment'
 import CommentModal from '@/components/CommentModal'
@@ -142,22 +150,75 @@ export default {
     //
   },
   data: () => ({
-    imgItem,
+    productInfo: true,    
+    loading: false,
+    error: null,
+    post: {},
+    // recentComments: [],
+    postComments: [],
 
+    imgItem,
     // for Dialog
     dialogm1: '',
     dialog: false,
   }),
+  async created() {
+    // fetch the data when the view is created and the data is
+    // already being observed
+    // this.fetchData()
+    await this.fetchData()
+  },
+  watch: {
+    // call again the method if the route changes
+    '$route': 'fetchData'
+  },
   computed: {
     
   },
   methods: {
+    async fetchData() {
+      this.error = this.post = null;
+      this.loading = true;
+      const fetchedId = this.$route.params.id;
+      this.id = this.$route.params.id;
+      
+      const post = await postsCollection.doc(this.id).get();
+      console.log('post: ', post.data())
+      this.post = post.data();
+
+      // const recentComments = await commentsCollection.where('postId', '==', this.id).get();
+
+      // recentComments.forEach(doc => {
+      //   let comment = doc.data()
+      //   comment.id = doc.id
+      //   this.recentComments.push(comment)
+      // })
+
+      const comments = await commentsCollection.where('postId', '==', this.id).get();
+
+      comments.forEach(doc => {
+        let comment = doc.data()
+        comment.id = doc.id
+        this.postComments.push(comment)
+      })
+
+      this.loading = false
+    },
     test1: () => {
 
     },
   },
   filters: {
-    
+    formatDate(val) {
+      if (!val) { return '-' }
+
+      let date = val.toDate()
+      return moment(date).fromNow()
+    },
+    trimLength(val) {
+      if (val.length < 200) { return val }
+      return `${val.substring(0, 200)}...`
+    }
   }
 }
 </script>
