@@ -9,6 +9,9 @@
     }
   }
   .product-item {
+    p {
+      margin: 0;
+    }
     &__link {
       color: inherit;
     }
