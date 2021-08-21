@@ -22,7 +22,7 @@
         <p>적폐의 자외선으로부터 적폐의 자외선으로부터 적폐의 자외선으로부터 민생을 지켜드립니다!</p>
         <v-row align="center" class="mx-0 mt-0 mb-1">
           <v-rating
-            :value="4.5"
+            :value="3.5"
             color="amber"
             size="16"
             dense
@@ -30,7 +30,7 @@
             readonly
           ></v-rating>
 
-          <div class="grey--text text-caption mt-1 ml-2"><strong>4.5</strong> (413건)</div>
+          <div class="grey--text text-caption mt-1 ml-2"><strong>3.5</strong> (4건)</div>
         </v-row>
       </v-card-text>
 
@@ -95,13 +95,126 @@
     <div v-if="productInfo">
       <div id="productDetail" v-if="post">
         <h3 class="text-h6">상세정보</h3>
-        <h3 class="text-h6">{{ post.title }}</h3>
+        <!-- <h3 class="text-h6">{{ post.title }}</h3> -->
         <v-divider class="mb-3"></v-divider>
 
-        <!-- please move style to scss -->
-        <pre style="margin: 0 0 40px">
+        <!-- Admin에서 등록한 Youtube URL Embed -->
+        <div class="contents-youtube">
+          <!-- 등록된 youtube URL 갯수만큼 .wrap-iframe에 감싸서 노출 -->
+          <div class="wrap-iframe">
+            <iframe
+              src="https://www.youtube.com/embed/PeJSII7H3IM"
+              frameborder="0"
+              width="100%"
+              allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture" 
+              allowfullscreen>
+            </iframe>
+          </div>
+
+          <div class="wrap-iframe">
+            <iframe
+              src="https://www.youtube.com/embed/QMIhj_pBQ7Q?start=2240"
+              frameborder="0"
+              width="100%"
+              allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture" 
+              allowfullscreen>
+            </iframe>
+          </div>
+        </div>
+
+        <!-- Admin에서 등록한 HTML 컨텐츠(wsywig 에디터에서 작성된 HTML태그?) -->
+        <div class="contents-html">
           {{ post.content }}
-        </pre>
+          <div style="text-align: center;"><img src="@/assets/img/temp/airport1.png" alt=""></div>
+          <div style="text-align: center;"><img src="@/assets/img/temp/airport2.png" alt=""></div>
+          <div style="text-align: center;"><img src="@/assets/img/temp/airport3.png" alt=""></div>
+          <div style="text-align: center;"><img src="@/assets/img/temp/airport4.png" alt=""></div>
+          <div style="text-align: center;"><img src="@/assets/img/temp/airport5.png" alt=""></div>
+          <div style="text-align: center;"><img src="@/assets/img/temp/airport6.png" alt=""></div>
+          <div style="text-align: center;"><img src="@/assets/img/temp/airport7.png" alt=""></div>
+          <div style="text-align: center;"><img src="@/assets/img/temp/airport8.png" alt=""></div>
+          <p><br></p>
+          <p style="font-size: 12px;color: blue;">추미애 후보님을 자랑하고, 자원봉사단 추풍당당을 자랑하고, 수많은 추미애 후보 지지자분들을 자랑합니다.</p>
+          <p><br></p>
+          <p>#추미애가옳았다</p>
+          <p>#정공법추미애</p>
+          <p>#사람이높은세상</p>
+          <p>#사람을높이는나라</p>
+        </div>
+
+        <!-- 코멘트 -->
+        <div id="productReview">
+          <div class="contents-comment">
+            <v-row align="center" justify="center" class="mx-0 mt-0 mb-1">
+              <v-rating
+                :value="3.5"
+                color="#ffbb18"
+                size="22"
+                dense
+                half-increments
+                readonly
+              ></v-rating>
+              <div class="ml-2"><strong>3.5</strong> / <span>5</span></div>
+            </v-row>
+            <div class="count text-center">(고객리뷰 <strong>4</strong>건)</div>
+          </div>
+
+          <v-list class="comment-list" three-line>
+            <template v-for="(comment, index) in comments">
+              <v-list-item :key="comment.number">
+                <v-list-item-content :key="index">
+                  <div class="wrap-button">
+                    <!-- [Dev] 자신의 댓글인 경우 -->
+                    <v-btn color="primary" depressed tile small>
+                      <v-icon left>mdi-comment-edit</v-icon>수정
+                    </v-btn>
+                    <v-btn color="primary" depressed tile small>
+                      <v-icon left>mdi-comment-remove</v-icon>삭제
+                    </v-btn>
+
+                    <!-- [Dev] 자신의 댓글인 아닌 경우 -->
+                    <!-- <v-btn color="primary" depressed tile small>
+                      <v-icon left>mdi-comment-question</v-icon>신고
+                    </v-btn> -->
+                  </div>
+                  <v-rating :value="comment.rate" color="#ffbb18" size="16" dense readonly></v-rating>
+                  <div class="comment-text">{{ comment.text }}</div>
+                  <div class="bottom">
+                    <span class="comment-user">{{ comment.user }}</span>
+                    <span> / </span>
+                    <span class="comment-date">{{ comment.date }}</span>
+                  </div>
+                </v-list-item-content>
+              </v-list-item>
+            </template>
+          </v-list>
+        </div>
+
+
+        <div class="comment-write">
+          <div class="text-center">이 상품을 평가해 주세요.</div>
+          <v-rating
+            class="text-center"
+            :value="3.5"
+            color="#ffbb18"
+            size="40"
+            dense
+            half-increments
+          ></v-rating>
+          <v-textarea
+            name="textarea네임"
+            label="상품에 대한 평가를 자유롭게 작성해주세요."
+            filled
+            auto-grow
+            rows="2"
+            row-height="26"
+            counter 
+            maxlength="150"
+            :append-outer-icon="'mdi-pencil'"
+            @click:clear="clearComment"
+            @click:append-outer="sendComment"
+          ></v-textarea>
+        </div>
 
         <!-- recent comments limit 3 -->
         <!-- <div v-show="recentComments.length" id="productReview" class="comments">
@@ -117,7 +230,7 @@
     </div>
     <!-- 고객리뷰 -->
     <div v-else>
-      <div v-show="postComments.length" id="productReview" class="comments">
+      <div v-show="postComments.length" class="comments">
         <h3 class="text-h6">고객리뷰</h3>
         <v-divider class="mb-3"></v-divider>
         <div v-for="comment in postComments" :key="comment.id" class="comment">
@@ -161,6 +274,50 @@ export default {
     // for Dialog
     dialogm1: '',
     dialog: false,
+
+    // 코멘트 관련
+    iconIndex: 0,
+    icons: [
+      'mdi-emoticon',
+      'mdi-emoticon-cool',
+      'mdi-emoticon-dead',
+      'mdi-emoticon-excited',
+      'mdi-emoticon-happy',
+      'mdi-emoticon-neutral',
+      'mdi-emoticon-sad',
+      'mdi-emoticon-tongue',
+    ],
+    commentContent: '테스트 코멘트',
+    comments: [
+      {
+        number: 'cn-2345',
+        user: '홍길동3',
+        date: '2021-09-03 15:30:15',
+        text: `Ali Connors &mdash; I'll be in your neighborhood doing errands this weekend. Do you want to hang out?`,
+        rate: 4.5,
+      },
+      {
+        number: 'cn-2344',
+        user: '홍길동4',
+        date: '2021-09-03 15:30:14',
+        text: `to Alex, Scott, Jennifer &mdash; Wish I could come, but I'm out of town this weekend.`,
+        rate: 3.5,
+      },
+      {
+        number: 'cn-2343',
+        user: '홍길동1',
+        date: '2021-09-03 15:30:13',
+        text: 'Sandra Adams &mdash; Do you have Paris recommendations? Have you ever been?',
+        rate: 5,
+      },
+      {
+        number: 'cn-2342',
+        user: '홍길동5',
+        date: '2021-09-03 15:30:12',
+        text: 'Trevor Hansen &mdash; Have any ideas about what we should get Heidi for her birthday?',
+        rate: 2.5,
+      },
+    ],
   }),
   async created() {
     // fetch the data when the view is created and the data is
@@ -176,6 +333,18 @@ export default {
     
   },
   methods: {
+    // 코멘트 관련
+    sendComment () {
+      this.resetIcon()
+      this.clearComment()
+    },
+    resetIcon () {
+      this.iconIndex = 0
+    },
+    clearComment () {
+      this.commentContent = '';
+    },
+
     async fetchData() {
       this.error = this.post = null;
       this.loading = true;
