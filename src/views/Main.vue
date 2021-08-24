@@ -17,7 +17,7 @@
       <div class="left box"></div>
       <h2 class="title-value">Market Choo Best</h2>
       <div class="right box">
-        <a href="/list" class="more">더보기</a>
+        <a href="/products" class="more">더보기</a>
       </div>
     </div>
 
@@ -64,39 +64,9 @@ export default {
   computed: {
     ...mapState(['userProfile', 'bestPosts'])
   },
-  methods: {
-    createPost() {
-      this.$store.dispatch('createPost', { content: this.post.content })
-      this.post.content = ''
-    },
-    toggleCommentModal(post) {
-      this.showCommentModal = !this.showCommentModal
-
-      // if opening modal set selectedPost, else clear
-      if (this.showCommentModal) {
-        this.selectedPost = post
-      } else {
-        this.selectedPost = {}
-      }
-    },
+  methods: {    
     likePost(id, likesCount) {
       this.$store.dispatch('likePost', { id, likesCount })
-    },
-    async viewPost(post) {
-      const docs = await commentsCollection.where('postId', '==', post.id).get()
-
-      docs.forEach(doc => {
-        let comment = doc.data()
-        comment.id = doc.id
-        this.postComments.push(comment)
-      })
-
-      this.fullPost = post
-      this.showPostModal = true
-    },
-    closePostModal() {
-      this.postComments = []
-      this.showPostModal = false
     }
   },
   filters: {
