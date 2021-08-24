@@ -2,7 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Dashboard from '../views/Dashboard.vue'
 import Main from '../views/Main.vue'
-import List from '../views/List.vue'
+import ProductList from '../views/ProductList.vue'
 import Product from '../views/Product.vue'
 import { auth } from '../firebase'
 
@@ -23,9 +23,9 @@ const routes = [
     }
   },
   {
-    path: '/list',
-    name: 'List',
-    component: List
+    path: '/products',
+    name: 'ProductList',
+    component: ProductList
   },
   {
     path: '/product/:id',

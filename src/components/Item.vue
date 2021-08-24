@@ -17,7 +17,7 @@
 
     <div class="product-item__bottom">
       <v-card-text>
-        <a href="/product/32" class="product-item__link">
+        <a v-bind:href="'/product/'+ id" class="product-item__link">
           <h2 class="text-h6 primary--text">{{ title }}</h2>
           {{ content | trimLength }}
         </a>
@@ -58,7 +58,7 @@
 </template>
 
 <script>
-import imgItem from "@/assets/img/@item.jpg";
+import imgItem from "../../public/img/@item.jpg";
 import moment from 'moment'
 
 export default {
