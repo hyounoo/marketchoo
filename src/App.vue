@@ -98,7 +98,7 @@
               </v-list-item-content>
             </v-list-item>
 
-            <v-list-item href="/settings">
+            <v-list-item v-if="signedIn" href="/settings">
               <v-list-item-icon>
                 <v-icon v-text="'mdi-cog'"></v-icon>
               </v-list-item-icon>
@@ -107,7 +107,7 @@
               </v-list-item-content>
             </v-list-item>
 
-            <v-list-item v-if="this.isAdmin" href="/dashboard">
+            <v-list-item v-if="isAdmin" href="/dashboard">
               <v-list-item-icon>
                 <v-icon v-text="'mdi-cog'"></v-icon>
               </v-list-item-icon>

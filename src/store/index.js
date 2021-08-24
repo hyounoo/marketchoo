@@ -23,7 +23,7 @@ fb.postsCollection.orderBy('createdOn', 'desc').onSnapshot(snapshot => {
   store.commit('setPosts', postsArray)
 })
 
-fb.postsCollection.orderBy('likes', 'desc').limit(3).onSnapshot(snapshot => {
+fb.postsCollection.orderBy('likes', 'desc').limit(8).onSnapshot(snapshot => {
   let postsArray = []
 
   snapshot.forEach(doc => {
