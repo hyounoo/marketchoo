@@ -267,7 +267,18 @@ export default {
       const post = await postsCollection.doc(this.id).get();
       console.log('post: ', post.data())
       this.post = post.data();
+      if (this.post.subTitle == null) {
+        this.post.subTitle = "적폐의 자외선으로부터 적폐의 자외선으로부터 민생을 지켜드립니다!"
+      }
 
+      if (this.post.thumbnail == null) {
+        this.post.thumbnail = imgItem
+      }
+
+      if (this.post.youtube == null) {
+        this.post.youtube = "https://www.youtube.com/embed/PeJSII7H3IM"
+      }
+      
       const comments = await commentsCollection.where('postId', '==', this.id).get();
 
       comments.forEach(doc => {
