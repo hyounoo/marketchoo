@@ -7,7 +7,7 @@ import router from '../router/index'
 Vue.use(Vuex)
 
 // TODO: change this to role based authentication using firestore auth api
-const admins = ['hyounoosung@gmail.com', 'good617boy@gmail.com']
+const admins = ['hyounoosung@gmail.com', 'good617boy@gmail.com', 'odeng96@gmail.com']
 
 // realtime firebase
 fb.postsCollection.orderBy('createdOn', 'desc').onSnapshot(snapshot => {
