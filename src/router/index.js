@@ -62,7 +62,7 @@ const router = new VueRouter({
 })
 
 // TODO: change this to role based authentication using firestore auth api
-const admins = ['hyounoosung@gmail.com', 'good617boy@gmail.com']
+const admins = ['hyounoosung@gmail.com', 'good617boy@gmail.com', 'odeng96@gmail.com']
 
 // navigation guard to check for logged in users
 router.beforeEach((to, from, next) => {
