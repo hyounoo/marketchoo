@@ -15,15 +15,14 @@ const query = `//groq
 
 export default function Home({ productsData, preview }: { productsData: any; preview: boolean }) {
   const router = useRouter()
-
-  if (!router.isFallback && !productsData) {
-    return <Error statusCode={404} />
-  }
-
   const { data: products } = usePreviewSubscription(query, {
     initialData: productsData,
     enabled: preview || router.query.preview !== null
   })
+
+  if (!router.isFallback && !productsData) {
+    return <Error statusCode={404} />
+  }
 
   return (
     <Layout home>
