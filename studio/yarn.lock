@@ -1261,9 +1261,11 @@
   "version" "2.1.4"
 
 "@sanity/components@^2.2.6":
+  "integrity" "sha512-D8t7l+exvw1cg80m8yDZDRboAI6L827FeCacGjTOdElvgrR2shtsbepYui7ODfRgx9ynAceNDsQ1VSNnUgIHug=="
   "version" "2.14.0"
 
 "@sanity/core@^2.2.6":
+  "integrity" "sha512-9L7eOZHYzCRWth/Ka0vgV/hu9zb/RRm7GAy9m3CcWTSxiV2wOt+MiazSL/HANE9UiVALndd2XHU9QkuJkrNE4A=="
   "version" "2.17.1"
   dependencies:
     "@babel/plugin-proposal-class-properties" "^7.10.4"
@@ -1342,6 +1344,7 @@
     "lodash" "^4.17.15"
 
 "@sanity/default-layout@^2.3.2":
+  "integrity" "sha512-ov+F1oAoUM3MXP1lUIMQx5Jd1p7yNxxbjlpkM43L2qWQxxsG3fj4BD+dbEik7b4qNBaUnIeljFR0KlsGr5pc/Q=="
   "version" "2.17.1"
   dependencies:
     "@reach/auto-id" "^0.13.2"
@@ -1359,6 +1362,7 @@
     "styled-components" "^5.2.1"
 
 "@sanity/default-login@^2.2.6":
+  "integrity" "sha512-i+uldML4AtQPJze8TuatdDskkIFkjm6UDtw+I0Vq6GCBieePs8oNirOB4a9Nh+dcn3Vw4kxqvL6sKgrO+gEPRA=="
   "version" "2.17.1"
   dependencies:
     "@sanity/generate-help-url" "2.15.0"
@@ -1369,6 +1373,7 @@
     "styled-components" "^5.2.1"
 
 "@sanity/desk-tool@^2.3.2":
+  "integrity" "sha512-i59EO9TjQY8I9pReoMtGETbLzNoK9nib71QXFdQLuh3BZ6WRuoVarL9E5V/DrYzkrwNx1UlDeJfb+C66bkBI7A=="
   "version" "2.17.1"
   dependencies:
     "@popperjs/core" "^2.5.4"
@@ -1785,6 +1790,7 @@
     "lodash" "^4.17.15"
 
 "@sanity/vision@^2.2.6":
+  "integrity" "sha512-9VKrns7b3YT77Ial4iJJWA4P4+H/vdmtEgOaFBgwxvPOvaOzXXPzvWBNNtBJjdveyzEw3JOOdWuu0FjxCbAAVQ=="
   "version" "2.15.0"
   dependencies:
     "@sanity/icons" "^1.1.4"
