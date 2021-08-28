@@ -15,9 +15,8 @@ npm install
 First, run the development server:
 
 ```bash
-npm run dev
-# or
-yarn dev
+# substitude {stage} with int(internal test) or prd(production)
+npm run dev:{stage}
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
@@ -25,17 +24,21 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 ## Compiles and minifies for production
 
 ```bash
-# substitude {stage} with
-# int(for internal test) or
-# prd(for production)
+# substitude {stage} with int(internal test) or prd(production)
 npm run build:{stage}
+```
+
+## Run production mode
+```bash
+npm run start
 ```
 
 ## Changelog
 
 \*Our target release date is Sep 2, 2021
 
-- Project intialized with create-next-app.
+- Project intialized with create-next-app and typescript.
+- Apply Tailwindcss.
 - Firebase initialized.
 - FireStore realtime database initialized.
 - Firebase hosting intialized.
