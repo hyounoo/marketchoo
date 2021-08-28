@@ -3,11 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev:int": "dotenv -e .env.int -- next dev",
-    "dev:prd": "dotenv -e .env.prd -- next dev",
-    "build:int": "dotenv -e .env.int -- next build",
-    "build:prd": "dotenv -e .env.prd -- next build",
-    "build": "next build",
+    "dev:int": "concurrently \"dotenv -e .env.int -- next dev\" \"cd studio && sanity start\"",
+    "dev:prd": "dotenv -e .env.prd -- next dev \"cd studio && sanity start\"",
+    "build:int": "echo 'Building Sanity to public/studio…' && dotenv -e .env.int -- cd studio && sanity build ../public/studio -y && cd .. && next build",
+    "build:prd": "echo 'Building Sanity to public/studio…' && dotenv -e .env.prd -- cd studio && sanity build ../public/studio -y && cd .. && next build",
+    "build": "echo 'Building Sanity to public/studio…' && cd studio && sanity build ../public/studio -y && cd .. && next build",
     "export": "next export",
     "start": "next start",
     "lint": "next lint"
@@ -35,6 +35,7 @@
   "devDependencies": {
     "@types/react": "17.0.19",
     "autoprefixer": "^10.3.3",
+    "concurrently": "^6.2.1",
     "dotenv": "^10.0.0",
     "dotenv-cli": "^4.0.0",
     "eslint": "7.32.0",
