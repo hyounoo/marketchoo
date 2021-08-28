@@ -1,14 +1,14 @@
 import React from 'react'
 import Layout from '../../src/components/layout'
 
-export default function Faqs() {
+export default function Events() {
   return (
     <Layout>
       <section className="pt-12 pb-20 lg:bg-contain bg-top bg-no-repeat">
         <div className="container px-4 mx-auto">
           <img
             className="mx-auto sm:max-w-sm mb-10"
-            src="metis-assets/illustrations/hardworking-man.png"
+            src="/metis-assets/illustrations/hardworking-man.png"
             alt=""
             data-config-id="01_image"
           />

@@ -7,17 +7,29 @@
     "dev:prd": "dotenv -e .env.prd -- next dev",
     "build:int": "dotenv -e .env.int -- next build",
     "build:prd": "dotenv -e .env.prd -- next build",
+    "build": "next build",
     "start": "next start",
     "lint": "next lint"
   },
   "dependencies": {
     "@material-ui/core": "^4.12.3",
     "@material-ui/icons": "^4.11.2",
+    "classnames": "^2.3.1",
+    "date-fns": "^2.23.0",
+    "firebase": "^8.10.0",
+    "formik": "^2.2.9",
+    "gray-matter": "^4.0.3",
     "next": "11.1.0",
     "postcss-flexbugs-fixes": "^5.0.2",
     "postcss-preset-env": "^6.7.0",
     "react": "17.0.2",
-    "react-dom": "17.0.2"
+    "react-dom": "17.0.2",
+    "react-firebase-hooks": "^3.0.4",
+    "react-firebaseui": "^5.0.2",
+    "react-use": "^17.2.4",
+    "remark": "^14.0.1",
+    "remark-html": "^14.0.0",
+    "yup": "^0.32.9"
   },
   "devDependencies": {
     "@types/react": "17.0.19",
