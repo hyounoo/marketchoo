@@ -34,6 +34,7 @@
   },
   "devDependencies": {
     "@sanity/cli": "^2.0.9",
+    "lerna": "^3.22.1",
     "@types/react": "17.0.19",
     "autoprefixer": "^10.3.3",
     "postcss-flexbugs-fixes": "^5.0.2",
