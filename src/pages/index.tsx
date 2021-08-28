@@ -18,12 +18,12 @@ export default function Home({ productsData, preview }: { productsData: any; pre
 
   if (!router.isFallback && !productsData) {
     return <Error statusCode={404} />
+  } else {
+    const { data: products } = usePreviewSubscription(query, {
+      initialData: productsData,
+      enabled: preview || router.query.preview !== null
+    })
   }
-
-  const { data: products } = usePreviewSubscription(query, {
-    initialData: productsData,
-    enabled: preview || router.query.preview !== null
-  })
 
   return (
     <Layout home>
