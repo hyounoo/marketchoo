@@ -25,4 +25,4 @@ jobs:
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_MARKETCHOO_23EA6 }}'
-          projectId: marketchoo-dev
+          projectId: marketchoo-23ea6
