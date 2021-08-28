@@ -1,9 +1,9 @@
 import Head from 'next/head'
 import React from 'react'
-import Layout from '../../src/components/layout'
-import Date from '../../src/components/Date'
+import Layout from '../../components/layout'
+import Date from '../../components/Date'
 import { GetStaticPaths, GetStaticProps } from 'next'
-import { getAppArticleSlugs, getArticleData } from '../../src/lib/articles'
+import { getAppArticleSlugs, getArticleData } from '../../lib/articles'
 
 export default function Article({
   articleData

@@ -2,7 +2,7 @@ module.exports = {
   mode: 'jit',
   purge: [
     // Use *.tsx if using TypeScript
-    './pages/**/*.tsx',
+    './src/pages/**/*.tsx',
     './src/components/**/*.tsx'
   ],
   theme: {
