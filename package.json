@@ -9,6 +9,8 @@
     "build:prd": "echo 'Building Sanity to public/studio…' && dotenv -e .env.prd -- cd studio && sanity build ../public/studio -y && cd .. && next build",
     "build": "echo 'Building Sanity to public/studio…' && cd studio && sanity build ../public/studio -y && cd .. && next build",
     "start": "next start",
+    "postinstall": "lerna bootstrap",
+    "check-template": "sanity-template check",
     "lint": "next lint"
   },
   "dependencies": {
