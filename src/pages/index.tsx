@@ -20,6 +20,11 @@ export default function Home({ productsData, preview }: { productsData: any; pre
     return <Error statusCode={404} />
   }
 
+  const { data: products } = usePreviewSubscription(query, {
+    initialData: productsData,
+    enabled: preview || router.query.preview !== null
+  })
+
   return (
     <Layout home>
       <div className="flex flex-col items-center justify-center min-h-screen py-2">
