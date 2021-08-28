@@ -33,6 +33,7 @@
     "yup": "^0.32.9"
   },
   "devDependencies": {
+    "@sanity/cli": "^2.0.9",
     "@types/react": "17.0.19",
     "autoprefixer": "^10.3.3",
     "postcss-flexbugs-fixes": "^5.0.2",
