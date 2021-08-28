@@ -27,7 +27,7 @@ export default function Home({
           <h1 className="text-6xl font-bold">Welcome to {siteTitle}</h1>
 
           <section>
-            <p>Current stage is:</p>
+            <p>Current deployed stage is:</p>
             <p>{process.env.NEXT_PUBLIC_STAGE}</p>
           </section>
 
