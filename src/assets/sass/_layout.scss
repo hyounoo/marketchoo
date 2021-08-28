@@ -1,0 +1,19 @@
+html {
+  height: 100%;
+}
+body {
+  padding-top: var(--header-height);
+  height: 100%;
+  box-sizing: border-box;
+
+  > div {
+    height: 100%;
+  }
+}
+.container {
+  // min-height: calc(100% - var(--header-height) - var(--footer-height);
+  min-height: calc(100% - var(--footer-height));
+}
+.contents {
+  display: block;
+}
