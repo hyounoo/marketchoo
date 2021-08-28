@@ -1,18 +1,8 @@
 # marketchoo
 
-> A simple social media web app built with Vue.js and Firebase's Cloud Firestore for supporters of former minister of justice Choo. [Visit website](https://marketchoo-89871.web.app/)
+> A simple social media web app built with next.js and Firebase's Cloud Firestore for supporters of former minister of justice Choo. [Visit website](https://marketchoo-23ea6.web.app/)
 
-### Changelog
-
-\*Our target release date is Aug 20, 2021
-
-Changelog:
-
-- Project intialized with vue-cli.
-- Firebase initialized.
-- FireStore realtime database initialized.
-- Firebase hosting intialized.
--
+This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Project setup
 
@@ -20,29 +10,41 @@ Changelog:
 npm install
 ```
 
-### Compiles and hot-reloads for development
+## Getting Started
 
-```
-npm run serve
-```
+First, run the development server:
 
-### Compiles and minifies for production
-
-```
-npm run build
+```bash
+# substitude {stage} with int(internal test) or prd(production)
+npm run dev:{stage}
 ```
 
-### Lints and fixes files
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
+## Compiles and minifies for production
+
+```bash
+# substitude {stage} with int(internal test) or prd(production)
+npm run build:{stage}
 ```
-npm run lint
+
+## Run production mode
+```bash
+npm run start
 ```
 
-### Customize configuration
+## Changelog
 
-See [Configuration Reference](https://cli.vuejs.org/config/).
+\*Our target release date is Sep 2, 2021
 
-### Feature Roadmap
+- Project intialized with create-next-app and typescript.
+- Apply Tailwindcss.
+- Firebase initialized.
+- FireStore realtime database initialized.
+- Firebase hosting intialized.
+-
+
+## Feature Roadmap
 
 [Our roadmap](roadmap.md) communicates features currently in development (private preview) and on-going priorities for extending the scope of Market Choo. It will continue to evolve based on market changes and customer feedback, so please note that the plans outlined here are not exhaustive or guaranteed. We welcome your feedback on the roadmap.
 
