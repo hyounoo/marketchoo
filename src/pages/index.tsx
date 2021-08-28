@@ -1,9 +1,9 @@
 import { GetStaticProps } from 'next'
 import Head from 'next/head'
 import Link from 'next/link'
-import Layout, { siteTitle } from '../src/components/layout'
-import Date from '../src/components/Date'
-import { getSortedArticlesData } from '../src/lib/articles'
+import Layout, { siteTitle } from '../components/layout'
+import Date from '../components/Date'
+import { getSortedArticlesData } from '../lib/articles'
 
 export default function Home({
   allArticlesData

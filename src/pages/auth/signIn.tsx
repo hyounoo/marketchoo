@@ -2,8 +2,8 @@
 import router from 'next/router'
 import React from 'react'
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth'
-import Layout, { siteTitle } from '../../src/components/layout'
-import firebase from '../../src/firebase'
+import Layout, { siteTitle } from '../../components/layout'
+import firebase from '../../firebase'
 import { useAuthState } from 'react-firebase-hooks/auth'
 import Link from 'next/link'
 
