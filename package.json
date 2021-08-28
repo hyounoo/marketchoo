@@ -8,6 +8,7 @@
     "build:int": "dotenv -e .env.int -- next build",
     "build:prd": "dotenv -e .env.prd -- next build",
     "build": "next build",
+    "export": "next export",
     "start": "next start",
     "lint": "next lint"
   },
