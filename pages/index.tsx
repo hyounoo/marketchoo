@@ -1,6 +1,5 @@
 import { GetStaticProps } from 'next'
 import Head from 'next/head'
-import Image from 'next/image'
 import Link from 'next/link'
 import Layout, { siteTitle } from '../src/components/layout'
 import Date from '../src/components/Date'
@@ -97,7 +96,7 @@ export default function Home({
             target="_blank"
             rel="noopener noreferrer"
           >
-            Powered by <Image src="/vercel.svg" alt="Vercel Logo" width={72} height={16} />
+            Powered by <img src="/vercel.svg" alt="Vercel Logo" width={72} height={16} />
           </a>
         </footer>
       </div>

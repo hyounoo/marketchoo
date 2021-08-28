@@ -1,4 +1,3 @@
-import Image from 'next/image'
 import Link from 'next/link'
 import firebase from '../firebase'
 import { useAuthState } from 'react-firebase-hooks/auth'
@@ -27,7 +26,7 @@ export default function Header() {
         <nav className="flex items-center py-6">
           <Link href="/">
             <a className="text-3xl font-semibold leading-none" onClick={handleNavigation}>
-              <Image priority src="/images/profile.jpg" width={80} height={40} alt="MarketChoo" />
+              <img src="/images/profile.jpg" width={80} height={40} alt="MarketChoo" />
             </a>
           </Link>
           <div className="lg:hidden ml-auto">
@@ -92,14 +91,7 @@ export default function Header() {
           <div className="flex items-center mb-8">
             <Link href="/">
               <a className="mr-auto text-3xl font-semibold leading-none" onClick={handleNavigation}>
-                <Image
-                  priority
-                  className="rounded-full"
-                  src="/images/profile.jpg"
-                  width={76}
-                  height={76}
-                  alt="MarketChoo"
-                />
+                <img className="rounded-full" src="/images/profile.jpg" width={76} height={76} alt="MarketChoo" />
               </a>
             </Link>
             <button className="navbar-close" onClick={() => setIsShown(!isShown)}>
