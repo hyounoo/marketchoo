@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Image from 'next/image'
 import packageInfo from '../../package.json'
 
 export default function Footer() {
@@ -9,7 +10,7 @@ export default function Footer() {
           <div className="w-full lg:w-1/5 px-3 mb-6 lg:mb-0">
             <Link href="/">
               <a className="inline-block mx-auto lg:mx-0 text-3xl font-semibold leading-none" data-config-id="brand">
-                <img src="/images/profile.jpg" width={80} height={40} alt="MarketChoo" />
+                <Image priority src="/images/profile.jpg" width={80} height={40} alt="MarketChoo" />
               </a>
             </Link>
           </div>
