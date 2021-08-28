@@ -3,19 +3,25 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
+    "dev:int": "dotenv -e .env.int -- next dev",
+    "dev:prd": "dotenv -e .env.prd -- next dev",
+    "build:int": "dotenv -e .env.int -- next build",
+    "build:prd": "dotenv -e .env.prd -- next build",
     "start": "next start",
     "lint": "next lint"
   },
   "dependencies": {
     "next": "11.1.0",
+    "postcss-flexbugs-fixes": "^5.0.2",
+    "postcss-preset-env": "^6.7.0",
     "react": "17.0.2",
     "react-dom": "17.0.2"
   },
   "devDependencies": {
     "@types/react": "17.0.19",
     "autoprefixer": "^10.3.3",
+    "dotenv": "^10.0.0",
+    "dotenv-cli": "^4.0.0",
     "eslint": "7.32.0",
     "eslint-config-next": "11.1.0",
     "postcss": "^8.3.6",
