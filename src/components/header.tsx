@@ -26,7 +26,7 @@ export default function Header() {
         <nav className="flex items-center py-2">
           <Link href="/">
             <a className="text-3xl font-semibold leading-none" onClick={handleNavigation}>
-              <img src="/images/logo.gif" width={76} height={76} alt="MarketChoo" />
+              <img src="/images/logo_120.svg" width={76} height={76} alt="MarketChoo" />
             </a>
           </Link>
           <div className="lg:hidden ml-auto">
