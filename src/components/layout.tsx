@@ -3,6 +3,7 @@ import Head from 'next/head'
 import Header from './header-markup'
 // import Footer from './footer'
 import Footer from './footer-markup'
+import { StylesProvider } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container'
 
 export const siteTitle = 'Market Choo'
@@ -24,9 +25,11 @@ export default function Layout({ children, home }: { children: React.ReactNode; 
         <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
       </Head>
       <Header></Header>
-      <Container id="container" className="container">
-        <main id="contents" className="contents">{children}</main>
-      </Container>
+      <StylesProvider injectFirst>
+        <Container id="container" className="container">
+          <main id="contents" className="contents">{children}</main>
+        </Container>
+      </StylesProvider>
       <Footer />
     </>
   )
