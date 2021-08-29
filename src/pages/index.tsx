@@ -32,21 +32,14 @@ export default function Home({ productsData, preview }: { productsData: any; pre
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <h1 className="text-6xl font-bold">Welcome to {siteTitle}</h1>
-
-      <section>
-        <p>Current deployed stage is:</p>
-        <p>{process.env.NEXT_PUBLIC_STAGE}</p>
-        <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 mt-6">
+      <h1 className="text-2xl lg:text-4xl font-bold">Welcome to {siteTitle}</h1>
+      <section className="mt-6 mb-6">
+        <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {productsData.map((product: any) => (
             <ProductCard key={product._id} {...product} />
           ))}
         </div>
       </section>
-
-      <p className="mt-3 text-2xl">
-        Get started by editing <code className="p-3 font-mono text-lg bg-gray-100 rounded-md">pages/index.js</code>
-      </p>
     </Layout>
   )
 }
