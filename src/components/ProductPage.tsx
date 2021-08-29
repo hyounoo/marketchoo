@@ -24,13 +24,13 @@ function ProductPage({ product }: { product: Product }) {
         <div className="w-full h-64 md:w-1/2 lg:h-96">
           <img
             className="h-full w-full rounded-md object-cover max-w-lg mx-auto"
-            src={urlFor(product.mainImage).auto('format').width(1051).fit('crop').quality(80).toString()!}
-            alt={product.mainImage?.alt || `Photo of ${product.title}`}
+            src={urlFor(product?.mainImage).auto('format').width(1051).fit('crop').quality(80).toString()!}
+            alt={product?.mainImage?.alt || `Photo of ${product?.title}`}
           />
         </div>
         <div className="w-full max-w-lg mx-auto mt-5 md:ml-8 md:mt-0 md:w-1/2">
-          <h3 className="text-gray-700 uppercase text-lg">{product.title}</h3>
-          <span className="text-gray-500 mt-3">${product.defaultProductVariant?.price}</span>
+          <h3 className="text-gray-700 uppercase text-lg">{product?.title}</h3>
+          <span className="text-gray-500 mt-3">${product?.defaultProductVariant?.price}</span>
           <hr className="my-3" />
           <div className="mt-2">
             <label className="text-gray-700 text-sm" htmlFor="count">
@@ -88,7 +88,7 @@ function ProductPage({ product }: { product: Product }) {
       </div>
       <div className="mt-16 md:w-2/3">
         <h3 className="text-gray-600 text-2xl font-medium">Description</h3>
-        {product.body && <PortableText blocks={product.body?.en} className="text-gray-600" />}
+        {product?.body && <PortableText blocks={product?.body?.en} className="text-gray-600" />}
       </div>
     </div>
   )
