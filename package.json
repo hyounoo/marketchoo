@@ -4,11 +4,11 @@
   "private": true,
   "scripts": {
     "dev:int": "concurrently \"dotenv -e .env.int -- next dev\" \"cd studio && sanity start\"",
-    "dev:prd": "dotenv -e .env.prd -- next dev \"cd studio && sanity start\"",
+    "dev:prd": "concurrently \"dotenv -e .env.prd -- next dev\" \"cd studio && sanity start\"",
     "build:int": "dotenv -e .env.int -- echo 'Building Sanity to public/studio…' && cd studio && sanity build ../public/studio -y && cd .. && next build",
-    "build:prd": "dotenv -e .env.int -- echo 'Building Sanity to public/studio…' && cd studio && sanity build ../public/studio -y && cd .. && next build",
+    "build:prd": "dotenv -e .env.prd -- echo 'Building Sanity to public/studio…' && cd studio && sanity build ../public/studio -y && cd .. && next build",
     "build": "echo 'Building Sanity to public/studio…' && cd studio && sanity build ../public/studio -y && cd .. && next build",
-    "start": "next start",
+    "start": "concurrently \"next start\" \"cd studio && sanity start\"",
     "postinstall": "lerna bootstrap",
     "check-template": "sanity-template check",
     "lint": "next lint"
