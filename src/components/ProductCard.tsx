@@ -40,6 +40,7 @@ function ProductCard({
         <div className="px-5 py-3">
           <h3 className="text-gray-700 uppercase">{title}</h3>
           <span className="text-gray-500 mt-2">${defaultProductVariant?.price}</span>
+          <p>current: {slug.current}</p>
         </div>
       </a>
     </Link>
