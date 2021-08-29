@@ -6,7 +6,7 @@ export const siteTitle = 'Market Choo'
 
 export default function Layout({ children, home }: { children: React.ReactNode; home?: boolean }) {
   return (
-    <div className="flex flex-col h-screen justify-between">
+    <div className="flex flex-col min-h-screen justify-between">
       <Head>
         <link rel="icon" href="/favicon.ico" />
         <meta name="description" content="Learn how to build a personal website using Next.js" />
