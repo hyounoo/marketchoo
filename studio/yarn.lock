@@ -998,7 +998,7 @@
     "lodash" "^4.17.19"
     "to-fast-properties" "^2.0.0"
 
-"@daybrush/utils@^1.0.0", "@daybrush/utils@^1.1.1":
+"@daybrush/utils@^1.0.0", "@daybrush/utils@^1.1.1", "@daybrush/utils@>=1.0.0":
   "integrity" "sha512-9MjMoOLl1U+l8lXByN3BbLZXf+mktoLyeb6t78Jz2WZ7LRldK0FNg8oW//9giO2hHCUyxS7LX6jS1hToGIfRWA=="
   "resolved" "https://registry.npmjs.org/@daybrush/utils/-/utils-1.6.0.tgz"
   "version" "1.6.0"
@@ -1136,7 +1136,7 @@
   "resolved" "https://registry.npmjs.org/@sanity/asset-utils/-/asset-utils-1.1.5.tgz"
   "version" "1.1.5"
 
-"@sanity/base@^2.14", "@sanity/base@^2.3.2", "@sanity/base@2.17.1":
+"@sanity/base@^2.0.0", "@sanity/base@^2.14", "@sanity/base@^2.3.2", "@sanity/base@2.17.1":
   "integrity" "sha512-2Gi5AjUQk83Owggq/PRl4GlGlHLVzs/7h+11gmRCzWwYSMSZibldth9KxraWiFYkrx99+IxnGULcb2/YCevqJA=="
   "resolved" "https://registry.npmjs.org/@sanity/base/-/base-2.17.1.tgz"
   "version" "2.17.1"
@@ -1833,7 +1833,7 @@
     "@sanity/util" "2.17.1"
     "loader-utils" "1.1.0"
 
-"@scena/dragscroll@^0.2.1":
+"@scena/dragscroll@>=0.2.1":
   "integrity" "sha512-8WrABWGvaALt0xMgesVZuA9Utt1q3zmGyqzWT22W1gfeKwVriqHTVldUQZevWIpgpnpIJtIW+/xFVsLtpmMsSA=="
   "resolved" "https://registry.npmjs.org/@scena/dragscroll/-/dragscroll-0.2.1.tgz"
   "version" "0.2.1"
@@ -3450,7 +3450,7 @@
     "@daybrush/utils" "^1.0.0"
     "string-hash" "^1.1.3"
 
-"css-to-mat@^0.1.3":
+"css-to-mat@>=0.1.2":
   "integrity" "sha512-tRvi637qIvcjma5d9kKBWaW6Ze3+Kd/kuIyZZhyN8dXNXpCzmfNNMisgIhw6hJr1yFE1fYiSed1zWlyLJfLyVA=="
   "resolved" "https://registry.npmjs.org/css-to-mat/-/css-to-mat-0.1.7.tgz"
   "version" "0.1.7"
@@ -4620,7 +4620,7 @@
   dependencies:
     "tslib" "^2.1.0"
 
-"framework-utils@^0.3.4":
+"framework-utils@>=0.3.4":
   "integrity" "sha512-Psekd+sXiHxtjLvK6aqi7vw6sQpShfBQSYlLkxCyhVzpmeTdxv1lCq8BGx++Mm5yw+MUn5IA4WKNO6LZFtOe2Q=="
   "resolved" "https://registry.npmjs.org/framework-utils/-/framework-utils-0.3.4.tgz"
   "version" "0.3.4"
