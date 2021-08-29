@@ -4,18 +4,26 @@ import Link from 'next/link'
 import Layout, { siteTitle } from '../components/layout'
 import Date from '../components/Date'
 import { getSortedArticlesData } from '../lib/articles'
-// import CssBaseline from '@material-ui/core/CssBaseline'
+import { getClient, usePreviewSubscription } from '../lib/sanity'
+import { useRouter } from 'next/router'
+import Error from 'next/error'
+import ProductCard from '../components/ProductCard'
 
-export default function Home({
-  allArticlesData
-}: {
-  allArticlesData: {
-    slug: string
-    title: string
-    date: string
-    contentHtml: string
-  }[]
-}) {
+const query = `//groq
+  *[_type == "product" && defined(slug.current)]
+`
+
+export default function Home({ productsData, preview }: { productsData: any; preview: boolean }) {
+  const router = useRouter()
+  const { data: products } = usePreviewSubscription(query, {
+    initialData: productsData,
+    enabled: preview || router.query.preview !== null
+  })
+
+  if (!router.isFallback && !productsData) {
+    return <Error statusCode={404} />
+  }
+
   return (
     <Layout home>
       {/* <CssBaseline /> */}
@@ -29,6 +37,11 @@ export default function Home({
       <section>
         <p>Current deployed stage is:</p>
         <p>{process.env.NEXT_PUBLIC_STAGE}</p>
+        <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 mt-6">
+          {productsData.map((product: any) => (
+            <ProductCard key={product._id} {...product} />
+          ))}
+        </div>
       </section>
 
       <p className="mt-3 text-2xl">
@@ -38,11 +51,22 @@ export default function Home({
   )
 }
 
-export const getStaticProps: GetStaticProps = async () => {
-  const allArticlesData = getSortedArticlesData()
+export const getStaticProps: GetStaticProps = async ({ params = {}, preview = false }) => {
+  const productsData = await getClient(preview).fetch(query)
+
   return {
     props: {
-      allArticlesData
+      preview,
+      productsData
     }
   }
 }
+
+// export const getStaticProps: GetStaticProps = async () => {
+//   const allArticlesData = getSortedArticlesData()
+//   return {
+//     props: {
+//       allArticlesData
+//     }
+//   }
+// }
