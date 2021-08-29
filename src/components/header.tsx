@@ -23,10 +23,10 @@ export default function Header() {
   return (
     <header className="bg-primay">
       <div className="container px-4 mx-auto">
-        <nav className="flex items-center py-6">
+        <nav className="flex items-center py-2">
           <Link href="/">
             <a className="text-3xl font-semibold leading-none" onClick={handleNavigation}>
-              <img src="/images/profile.jpg" width={80} height={40} alt="MarketChoo" />
+              <img src="/images/logo.gif" width={76} height={76} alt="MarketChoo" />
             </a>
           </Link>
           <div className="lg:hidden ml-auto">
@@ -91,7 +91,7 @@ export default function Header() {
           <div className="flex items-center mb-8">
             <Link href="/">
               <a className="mr-auto text-3xl font-semibold leading-none" onClick={handleNavigation}>
-                <img className="rounded-full" src="/images/profile.jpg" width={76} height={76} alt="MarketChoo" />
+                <img className="rounded-full" src="/images/logo.gif" width={76} height={76} alt="MarketChoo" />
               </a>
             </Link>
             <button className="navbar-close" onClick={() => setIsShown(!isShown)}>
