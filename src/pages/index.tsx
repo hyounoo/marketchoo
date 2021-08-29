@@ -45,7 +45,7 @@ export default function Home({ productsData, preview }: { productsData: any; pre
               <h3 className="text-gray-700 text-2xl font-medium">Juices</h3>
               <span className="mt-3 text-sm text-gray-500">The Juicy bits.</span>
               <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 mt-6">
-                {productsData.map((product: any) => (
+                {products.map((product: any) => (
                   <ProductCard key={product._id} {...product} />
                 ))}
               </div>
