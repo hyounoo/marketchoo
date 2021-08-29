@@ -7,7 +7,7 @@ import { getSortedArticlesData } from '../lib/articles'
 import { getClient, usePreviewSubscription } from '../lib/sanity'
 import { useRouter } from 'next/router'
 import Error from 'next/error'
-import ProductCard from '../components/ProductCard'
+import ProductPage from '../components/ProductsPage'
 
 const query = `//groq
   *[_type == "product" && defined(slug.current)]
@@ -26,7 +26,6 @@ export default function Home({ productsData, preview }: { productsData: any; pre
 
   return (
     <Layout home>
-      {/* <CssBaseline /> */}
       <Head>
         <title>{siteTitle}</title>
         <link rel="icon" href="/favicon.ico" />
