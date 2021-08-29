@@ -7,7 +7,7 @@ import { getSortedArticlesData } from '../lib/articles'
 import { getClient, usePreviewSubscription } from '../lib/sanity'
 import { useRouter } from 'next/router'
 import Error from 'next/error'
-import ProductCard from '../components/ProductCard'
+import ProductPage from '../components/ProductsPage'
 
 const query = `//groq
   *[_type == "product" && defined(slug.current)]
@@ -26,7 +26,7 @@ export default function Home({ productsData, preview }: { productsData: any; pre
 
   return (
     <Layout home>
-      <div className="flex flex-col items-center justify-center min-h-screen py-2">
+      <div className="flex flex-col items-center justify-center py-2">
         <Head>
           <title>{siteTitle}</title>
           <link rel="icon" href="/favicon.ico" />
@@ -41,15 +41,7 @@ export default function Home({ productsData, preview }: { productsData: any; pre
           </section>
 
           <section>
-            <div className="container mx-auto px-6">
-              <h3 className="text-gray-700 text-2xl font-medium">Juices</h3>
-              <span className="mt-3 text-sm text-gray-500">The Juicy bits.</span>
-              <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 mt-6">
-                {products.map((product: any) => (
-                  <ProductCard key={product._id} {...product} />
-                ))}
-              </div>
-            </div>
+            <ProductPage products={products} />
           </section>
         </main>
       </div>
