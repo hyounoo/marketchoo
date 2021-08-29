@@ -24,15 +24,15 @@ type Product = {
 
 export default function Product({ preview, productData }: { preview: boolean; productData: Product }) {
   const router = useRouter()
-  if (!router.isFallback && !productData?.slug) {
-    return <Error statusCode={404} />
-  }
-
   const { data: product } = usePreviewSubscription(query, {
     params: { slug: productData?.slug?.current },
     initialData: productData,
     enabled: preview || router.query.preview !== null
   })
+
+  if (!router.isFallback && !productData?.slug) {
+    return <Error statusCode={404} />
+  }
 
   return (
     <Layout>
