@@ -22,11 +22,13 @@ function ProductPage({ product }: { product: Product }) {
     <div className="container mx-auto px-6">
       <div className="md:flex md:items-center">
         <div className="w-full h-64 md:w-1/2 lg:h-96">
-          <img
-            className="h-full w-full rounded-md object-cover max-w-lg mx-auto"
-            src={urlFor(product?.mainImage).auto('format').width(1051).fit('crop').quality(80).toString()!}
-            alt={product?.mainImage?.alt || `Photo of ${product?.title}`}
-          />
+          {product?.mainImage && (
+            <img
+              className="h-full w-full rounded-md object-cover max-w-lg mx-auto"
+              src={urlFor(product?.mainImage).auto('format').width(1051).fit('crop').quality(80).toString()!}
+              alt={product?.mainImage?.alt || `Photo of ${product?.title}`}
+            />
+          )}
         </div>
         <div className="w-full max-w-lg mx-auto mt-5 md:ml-8 md:mt-0 md:w-1/2">
           <h3 className="text-gray-700 uppercase text-lg">{product?.title}</h3>
