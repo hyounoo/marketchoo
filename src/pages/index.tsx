@@ -26,7 +26,6 @@ export default function Home({ productsData, preview }: { productsData: any; pre
 
   return (
     <Layout home>
-      {/* <CssBaseline /> */}
       <Head>
         <title>{siteTitle}</title>
         <link rel="icon" href="/favicon.ico" />
