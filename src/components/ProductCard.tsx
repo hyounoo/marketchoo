@@ -24,15 +24,15 @@ function ProductCard({
             backgroundImage: `url('${urlFor(mainImage).auto('format').fit('crop').width(750).quality(80)}`
           }}
         >
-          <div className="flex justify-between -mb-3 px-4 w-full">
+          <div className="flex justify-end -mb-3 px-4 w-full">
             <div className="left">
-              <IconButton className="btn-cart z-10 p-2 min-w-0 rounded-lg text-white bg-blue-400 hover:bg-blue-500 transition-all">
-                <Icon color="inherit" className="align-top">shopping_cart</Icon>
+              <IconButton className="btn-cart z-10 p-2 min-w-0 rounded-full text-white bg-blue-600 hover:bg-blue-600">
+                <Icon fontSize="inherit" color="inherit" className="text-base align-top">shopping_cart</Icon>
               </IconButton>
             </div>
           </div>
         </div>
-        <div className="px-4 py-3 pt-4">
+        <div className="px-4 py-3">
           <h3 className="text-gray-700 uppercase">{title}</h3>
           <p className="text-gray-700 text-sm">상품설명 상품설명 상품설명</p>
           <div className="flex justify-between items-center">
@@ -51,6 +51,7 @@ function ProductCard({
               </IconButton>
             </div>
           </div>
+          <div>current: {slug.current}</div>
         </div>
       </a>
     </Link>
