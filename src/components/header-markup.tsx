@@ -1,33 +1,18 @@
 import Link from 'next/link'
 import firebase from '../firebase'
 import { useAuthState } from 'react-firebase-hooks/auth'
-import { siteTitle } from './layout'
+import { useToggle } from 'react-use'
+
 // Below for UI
-import React from 'react';
-import clsx from 'clsx';
-import { makeStyles, useTheme, Theme, createStyles } from '@material-ui/core/styles';
-import Drawer from '@material-ui/core/Drawer';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import List from '@material-ui/core/List';
-import Typography from '@material-ui/core/Typography';
-import Divider from '@material-ui/core/Divider';
-import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import Icon from '@material-ui/core/Icon';
-import Button from '@material-ui/core/Button';
+import React from 'react'
+import clsx from 'clsx'
+import { makeStyles, useTheme, Theme, createStyles } from '@material-ui/core/styles'
+import { Drawer, AppBar, Toolbar, List, Divider, IconButton, ListItem, ListItemIcon, ListItemText, Icon, Button } from '@material-ui/core'
+
 // Below for Dialog
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
+import { Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@material-ui/core'
 
 const drawerWidth = 280;
-
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     appBar: {
@@ -43,9 +28,6 @@ const useStyles = makeStyles((theme: Theme) =>
         easing: theme.transitions.easing.easeOut,
         duration: theme.transitions.duration.enteringScreen,
       }),
-    },
-    menuButton: {
-      marginRight: theme.spacing(2),
     },
     hide: {
       display: 'none',
@@ -92,6 +74,13 @@ export default function Header() {
   const [openNav, setOpenNav] = React.useState(false);
   const [openDialogPoint, setOpenDialogPoint] = React.useState(false);
 
+  const [isShown, setIsShown] = useToggle(false)
+  const handleNavigation = (e: any) => {
+    if (isShown) {
+      setIsShown(false)
+    }
+  }
+
   const handleDrawerOpen = () => {
     setOpenNav(true);
   };
@@ -118,23 +107,58 @@ export default function Header() {
           [classes.appBarShift]: openNav,
         })}
       >
-        <Toolbar>
+        <Toolbar className="flex justify-between">
           <IconButton
             color="inherit"
             aria-label="open drawer"
             onClick={handleDrawerOpen}
             edge="start"
-            className={clsx(classes.menuButton, openNav && classes.hide)}
+            className={clsx('', openNav && classes.hide)}
           >
-            <MenuIcon />
+            <Icon>menu</Icon>
           </IconButton>
-          <Typography variant="h6" noWrap>
-            {siteTitle}
-          </Typography>
+          <Link href="/">
+            <a className="text-3xl font-semibold leading-none" onClick={handleNavigation}>
+              <img src="/images/logo_120.svg" width={60} height={60} alt="MarketChoo" />
+            </a>
+          </Link>
 
-          <p className="absolute top-0 right-0 text-xs hidden xl:block">
+          <div className="overflow w-8 h-0"></div>
+          <div className="hidden lg:flex absolute top-2 right-0 mr-6">
+            <Link href="/products">
+              <a className="flex items-center text-white mr-6">
+                <Icon className="text-lg mr-2">shopify</Icon>
+                <span>상품</span>
+              </a>
+            </Link>
+            <Link href="/events">
+              <a className="flex items-center text-white mr-6">
+                <Icon className="text-lg mr-2">event</Icon>
+                <span>이벤트</span>
+              </a>
+            </Link>
+
+            {!user && (
+              <Button href="/auth/signIn" variant="contained" color="primary" endIcon={<Icon>login</Icon>}>
+                로그인
+              </Button>
+            )}
+            {user && (
+              <Button
+                variant="contained"
+                color="primary"
+                endIcon={<Icon>logout</Icon>}
+                onClick={() => {
+                  firebase.auth().signOut();
+                }}>
+                로그아웃
+              </Button>
+            )}
+          </div>
+
+          {/* <p className="absolute top-0 right-0 text-xs hidden xl:block">
             Current deployed stage is: <strong className="text-red-500">{process.env.NEXT_PUBLIC_STAGE}</strong>
-          </p>
+          </p> */}
         </Toolbar>
       </AppBar>
 
