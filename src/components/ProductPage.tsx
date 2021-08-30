@@ -1,11 +1,8 @@
 import { useState } from 'react'
 import { urlFor, PortableText, getClient } from '../lib/sanity'
-import FavoriteIcon from '@material-ui/icons/Favorite'
-import ShareIcon from '@material-ui/icons/Share'
-import { Card, CardContent, CardActions, IconButton, Typography, Input, Icon, Divider } from '@material-ui/core'
-import { Rating, ToggleButton } from '@material-ui/lab'
-import { EmailShareButton, FacebookShareButton, LineShareButton, TwitterShareButton } from "react-share"
-import { EmailIcon, FacebookIcon, LineIcon, TwitterIcon } from "react-share"
+import { Card, CardContent, Typography, Icon } from '@material-ui/core'
+import { Rating } from '@material-ui/lab'
+import { FacebookShareButton, TwitterShareButton, FacebookIcon, TwitterIcon } from "react-share"
 import { number } from 'yup'
 
 type Product = {

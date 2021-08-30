@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import { urlFor } from '../lib/sanity'
-import { IconButton, Icon, Button } from '@material-ui/core'
+import { IconButton, Icon } from '@material-ui/core'
 
 function ProductCard({
   _id,
