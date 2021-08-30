@@ -27,7 +27,7 @@ export default function Layout({ children, home }: { children: React.ReactNode; 
       </Head>
       <Header></Header>
         <Container id="container" className="container">
-          <main id="contents" className="contents">{children}</main>
+          <main id="contents" className="contents py-4">{children}</main>
         </Container>
       <Footer />
     </StylesProvider>

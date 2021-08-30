@@ -132,8 +132,8 @@ export default function Header() {
             {siteTitle}
           </Typography>
 
-          <p className="absolute top-0 right-0 text-xs">
-          Current deployed stage is: <strong className="text-red-500">{process.env.NEXT_PUBLIC_STAGE}</strong>
+          <p className="absolute top-0 right-0 text-xs hidden xl:block">
+            Current deployed stage is: <strong className="text-red-500">{process.env.NEXT_PUBLIC_STAGE}</strong>
           </p>
         </Toolbar>
       </AppBar>

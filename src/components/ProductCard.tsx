@@ -33,8 +33,8 @@ function ProductCard({
           </div>
         </div>
         <div className="px-4 py-3">
-          <h3 className="text-gray-700 uppercase">{title}</h3>
-          <p className="text-gray-700 text-sm">상품설명 상품설명 상품설명</p>
+          <h3 className="text-gray-700 text-left uppercase">{title}</h3>
+          {/* <p className="text-gray-700 text-sm">상품설명 상품설명 상품설명</p> */}
           <div className="flex justify-between items-center">
             <div className="text-gray-500 text-sm">
               <span className="font-bold mr-1">{defaultProductVariant?.price}</span>

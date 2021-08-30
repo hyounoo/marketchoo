@@ -1,0 +1,33 @@
+.product-card {
+  overflow: visible;
+
+  &__thumbs {
+    position: relative;
+    left: -16px;
+    width: calc(100% + 32px);
+  }
+  .input-count {
+    > input {
+      text-align: center;
+    }
+  }
+}
+
+@media (min-width: 640px) {
+
+.product-card {
+  overflow: visible;
+
+  &__thumbs {
+    position: static;
+    left: auto;
+    width: 100%;
+  }
+  .input-count {
+    > input {
+      text-align: center;
+    }
+  }
+}
+
+}

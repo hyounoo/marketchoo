@@ -13,10 +13,11 @@ body {
 .container {
   display: flex;
   justify-content: center;
-  align-items: center;
-  // min-height: calc(100% - var(--header-height) - var(--footer-height);
+  // align-items: center;
+  // min-height: calc(100% - var(--header-height) - var(--footer-height));
   min-height: calc(100% - var(--footer-height));
 }
 .contents {
   display: block;
+  width: 100%;
 }
