@@ -30,12 +30,6 @@ const uiConfig = {
 
 function SignInScreen() {
   const [user, loading, error] = useAuthState(firebase.auth())
-  const containerElem = document.querySelector('#container');
-
-  // <main> 엘리먼트의 자식노드 정렬을 가로/세로 중앙으로
-  if( !containerElem?.classList.contains('items-center') ) {
-    containerElem?.classList.add('items-center');
-  }
 
   if (user) {
     router.push('/')
