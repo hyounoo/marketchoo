@@ -26,9 +26,11 @@ export default function Layout({ children, home }: { children: React.ReactNode; 
         <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
       </Head>
       <Header></Header>
-        <Container id="container" className="container">
-          <main id="contents" className="contents">{children}</main>
-        </Container>
+      <Container id="container" className="container">
+        <main id="contents" className="contents">
+          {children}
+        </main>
+      </Container>
       <Footer />
     </StylesProvider>
   )
