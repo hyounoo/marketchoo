@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { urlFor } from '../lib/sanity'
+import { IconButton, Icon, Button } from '@material-ui/core'
 
 function ProductCard({
   _id,
@@ -37,10 +38,31 @@ function ProductCard({
             </svg>
           </button>
         </div>
-        <div className="px-5 py-3">
-          <h3 className="text-gray-700 uppercase">{title}</h3>
-          <span className="text-gray-500 mt-2">${defaultProductVariant?.price}</span>
-          <p>current: {slug.current}</p>
+        <div className="px-4 py-3">
+          <h3 className="text-gray-700 uppercase text-left">{title}</h3>
+          <p className="text-gray-700 text-sm text-left">상품설명...</p>
+          <div className="flex justify-between items-left">
+            <div className="text-gray-500 text-sm">
+              <span className="font-bold mr-1">{defaultProductVariant?.price}</span>
+              <span className="text-xs italic">CHOO</span>
+            </div>
+            <div className="flex items-start">
+              <button className="btn-comment flex-1 rounded-lg text-xs align-top">comments 32</button>
+              <button className="btn-comment flex-1 rounded-lg text-xs align-top">favorites 7</button>
+              {/* <IconButton className="btn-comment flex-1 p-2 rounded-lg text-xs align-top">
+                <Icon fontSize="inherit" className="text-sm">
+                  comment
+                </Icon>
+                <span className="inline-block ml-1 text-sm leading-none align-middle">32</span>
+              </IconButton> */}
+              {/* <IconButton className="btn-like flex-1 p-2 rounded-lg text-xs text-red-500 align-top">
+                <Icon fontSize="inherit" className="text-sm">
+                  favorite
+                </Icon>
+                <span className="inline-block ml-1 text-sm leading-none align-middle">7</span>
+              </IconButton> */}
+            </div>
+          </div>
         </div>
       </a>
     </Link>

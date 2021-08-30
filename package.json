@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "dev": "dotenv -e .env.int -- next dev -p 8080",
     "dev:int": "concurrently \"dotenv -e .env.int -- next dev\" \"cd studio && sanity start\"",
     "dev:prd": "concurrently \"dotenv -e .env.prd -- next dev\" \"cd studio && sanity start\"",
     "build:int": "dotenv -e .env.int -- echo 'Building Sanity to public/studio…' && cd studio && sanity build ../public/studio -y && cd .. && next build",
@@ -48,6 +49,7 @@
     "eslint-config-next": "11.1.0",
     "postcss": "^8.3.6",
     "tailwindcss": "^2.2.8",
-    "typescript": "4.4.2"
+    "typescript": "4.4.2",
+    "sass": "^1.38.2"
   }
 }
