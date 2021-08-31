@@ -175,7 +175,7 @@ function ProductPage({ product }: { product: Product }) {
 
       <ul id="tabProduct" className="tab-product lg:sticky flex border border-blue-600 h-12 text-blue-600 bg-white">
         <li className={clsx(tabDetail && "active", "flex-1 flex justify-center items-center border-r border-blue-600")} >
-          <a href="#productDetail" className="flex justify-center items-center w-full h-full">상풍상세</a>
+          <a href="#productDetail" className="flex justify-center items-center w-full h-full">상품상세</a>
         </li>
         <li className={clsx(tabReview && "active", "flex-1 flex justify-center items-center border-r border-blue-600")} >
           <a href="#productReview" className="flex justify-center items-center w-full h-full">상품후기</a>
