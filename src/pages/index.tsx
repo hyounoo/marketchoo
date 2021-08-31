@@ -26,25 +26,15 @@ export default function Home({ productsData, preview }: { productsData: any; pre
 
   return (
     <Layout home>
-      <div className="flex flex-col items-center justify-center py-2">
-        <Head>
-          <title>{siteTitle}</title>
-          <link rel="icon" href="/favicon.ico" />
-        </Head>
+      <Head>
+        <title>{siteTitle}</title>
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
 
-        <main className="flex flex-col items-center justify-center w-full flex-1 px-20 text-center">
-          <h1 className="text-6xl font-bold">Welcome to {siteTitle}</h1>
-
-          <section>
-            <p>Current deployed stage is:</p>
-            <p>{process.env.NEXT_PUBLIC_STAGE}</p>
-          </section>
-
-          <section>
-            <ProductPage products={products} />
-          </section>
-        </main>
-      </div>
+      <h1 className="text-2xl lg:text-4xl font-bold">Welcome to {siteTitle}</h1>
+      <section className="mt-6 mb-6">
+        <ProductPage products={products} />
+      </section>
     </Layout>
   )
 }

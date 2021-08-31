@@ -1,0 +1,12 @@
+.footer {
+  //
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  width: 100%;
+  height: var(--footer-height);
+  color: #fff;
+  background-color: rgba(#3f51b5, .8);
+}

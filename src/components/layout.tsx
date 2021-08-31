@@ -1,12 +1,16 @@
 import Head from 'next/head'
-import Header from './header'
-import Footer from './footer'
+// import Header from './header'
+import Header from './header-markup'
+// import Footer from './footer'
+import Footer from './footer-markup'
+import { StylesProvider } from '@material-ui/core/styles'
+import Container from '@material-ui/core/Container'
 
 export const siteTitle = 'Market Choo'
 
 export default function Layout({ children, home }: { children: React.ReactNode; home?: boolean }) {
   return (
-    <div className="flex flex-col min-h-screen justify-between">
+    <StylesProvider injectFirst>
       <Head>
         <link rel="icon" href="/favicon.ico" />
         <meta name="description" content="Learn how to build a personal website using Next.js" />
@@ -19,10 +23,13 @@ export default function Layout({ children, home }: { children: React.ReactNode; 
         />
         <meta name="og:title" content={siteTitle} />
         <meta name="twitter:card" content="summary_large_image" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
       </Head>
       <Header></Header>
-      <main>{children}</main>
+        <Container id="container" className="container">
+          <main id="contents" className="contents py-4">{children}</main>
+        </Container>
       <Footer />
-    </div>
+    </StylesProvider>
   )
 }
