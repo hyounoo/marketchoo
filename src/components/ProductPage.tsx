@@ -4,6 +4,8 @@ import { Card, CardContent, Typography, Icon } from '@material-ui/core'
 import { Rating } from '@material-ui/lab'
 import { FacebookShareButton, TwitterShareButton, FacebookIcon, TwitterIcon } from "react-share"
 import { number } from 'yup'
+import clsx from 'clsx'
+import { InView } from 'react-intersection-observer'
 
 type Product = {
   _id: any
@@ -28,6 +30,35 @@ function ProductPage({ product }: { product: Product }) {
 
   // for Rating
   const [rateValue, setRateValue] = useState<number | null>(3.5);
+
+  // for Intersection Observer
+  const [tabDetail, setTabDetail] = useState(false)
+  const [tabReview, setTabReview] = useState(false)
+  const [tabEtc, setTabEtc] = useState(false)
+  const handleIntersectionTab = (inView: any, entry: any) => {
+    const elem = entry.target;
+    const elemId = elem.getAttribute('id');
+    // console.log('Inview:', inView);
+    // console.log(elemId);
+
+    if(inView) {
+      if(elemId === 'productDetail') {
+        setTabDetail(true);
+        setTabReview(false);
+        setTabEtc(false);
+      }
+      else if(elemId === 'productReview') {
+        setTabDetail(false);
+        setTabReview(true);
+        setTabEtc(false);
+      }
+      else if(elemId === 'productEtc') {
+        setTabDetail(false);
+        setTabReview(false);
+        setTabEtc(true);
+      }
+    }
+  }
 
   // const shareUrl = path까지는 알아봤는데 HOST를 가져오는 방법을 모르겠어요 ㅠㅠ;
 
@@ -143,20 +174,19 @@ function ProductPage({ product }: { product: Product }) {
       </div>
 
       <ul id="tabProduct" className="tab-product lg:sticky flex border border-blue-600 h-12 text-blue-600 bg-white">
-        <li className="active flex-1 flex justify-center items-center border-r border-blue-600">
+        <li className={clsx(tabDetail && "active", "flex-1 flex justify-center items-center border-r border-blue-600")} >
           <a href="#productDetail" className="flex justify-center items-center w-full h-full">상풍상세</a>
         </li>
-        {/* 활성화 - className="active" */}
-        <li className="flex-1 flex justify-center items-center border-r border-blue-600">
+        <li className={clsx(tabReview && "active", "flex-1 flex justify-center items-center border-r border-blue-600")} >
           <a href="#productReview" className="flex justify-center items-center w-full h-full">상품후기</a>
         </li>
-        <li className="flex-1 flex justify-center items-center">
+        <li className={clsx(tabEtc && "active", "flex-1 flex justify-center items-center border-blue-600")} >
           <a href="#productEtc" className="flex justify-center items-center w-full h-full">기타안내</a>
         </li>
       </ul>
 
       {/* 상품상세 */}
-      <section id="productDetail" aria-label="상품상세" className="section mt-20 lg:pt-12">
+      <InView as="section" threshold={0.1} onChange={handleIntersectionTab} id="productDetail" className="section mt-20 lg:pt-12">
         <div className="section__inner">
           <h3 className="title text-md lg:text-lg">상품상세</h3>
           <div className="my-4">동해물과 백두산이 마르고 닳도록 하느님이 보우하사 우리나라 만세</div>
@@ -194,10 +224,10 @@ function ProductPage({ product }: { product: Product }) {
           <div className="my-4">동해물과 백두산이 마르고 닳도록 하느님이 보우하사 우리나라 만세</div>
           <div className="my-4">동해물과 백두산이 마르고 닳도록 하느님이 보우하사 우리나라 만세</div>
         </div>
-      </section>
+      </InView>
 
       {/* 상품후기 */}
-      <section id="productReview" aria-label="상품후기" className="section mt-20 lg:pt-12">
+      <InView as="section" threshold={0.5} onChange={handleIntersectionTab} id="productReview" className="section mt-20 lg:pt-12">
         <div className="section__inner">
           <h3 className="title text-md lg:text-lg">상품후기</h3>
           <div className="my-4">남산위에 저소나무 철갑을 두른듯 바람서리 불변함은 우리 기상일세</div>
@@ -218,10 +248,10 @@ function ProductPage({ product }: { product: Product }) {
           <div className="my-4">남산위에 저소나무 철갑을 두른듯 바람서리 불변함은 우리 기상일세</div>
           <div className="my-4">남산위에 저소나무 철갑을 두른듯 바람서리 불변함은 우리 기상일세</div>
         </div>
-      </section>
+      </InView>
 
       {/* 기타안내 */}
-      <section id="productEtc" aria-label="기타안내" className="section mt-20 lg:pt-12">
+      <InView as="section" threshold={0.5} onChange={handleIntersectionTab} id="productEtc" className="section mt-20 lg:pt-12">
         <div className="section__inner">
           <h3 className="title text-md lg:text-lg">기타안내</h3>
           <div className="my-4">가을하늘 공활한데 높고 구름없이 밝은달은 우리가슴 일편 단심일세</div>
@@ -241,7 +271,7 @@ function ProductPage({ product }: { product: Product }) {
           <div className="my-4">가을하늘 공활한데 높고 구름없이 밝은달은 우리가슴 일편 단심일세</div>
           <div className="my-4">가을하늘 공활한데 높고 구름없이 밝은달은 우리가슴 일편 단심일세</div>
         </div>
-      </section>
+      </InView>
     </div>
   )
 }
