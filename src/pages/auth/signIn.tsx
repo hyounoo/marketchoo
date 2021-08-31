@@ -38,6 +38,7 @@ function SignInScreen() {
   if (!user && !loading) {
     return (
       <Layout>
+        <div className="flex justify-center items-center h-full">
         <section className="py-20">
           <div className="container mx-auto">
             <div className="flex flex-col max-w-md mx-auto text-center shadow-2xl p-10">
@@ -62,6 +63,7 @@ function SignInScreen() {
             </div>
           </div>
         </section>
+        </div>
       </Layout>
     )
   } else {
