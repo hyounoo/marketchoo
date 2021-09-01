@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import firebase from '../firebase'
 import { urlFor, PortableText, getClient } from '../lib/sanity'
 import { Box, Card, CardContent, Icon, Typography, TextareaAutosize } from '@material-ui/core'
 import { Rating } from '@material-ui/lab'
@@ -6,6 +7,8 @@ import { FacebookShareButton, TwitterShareButton, FacebookIcon, TwitterIcon } fr
 import { number } from 'yup'
 import clsx from 'clsx'
 import { InView } from 'react-intersection-observer'
+import { useAuthState } from 'react-firebase-hooks/auth'
+import router from 'next/router'
 
 type Product = {
   _id: any
@@ -21,9 +24,26 @@ type Product = {
 }
 
 function ProductPage({ product }: { product: Product }) {
+  const [user, loading, error] = useAuthState(firebase.auth())
   const [count, setCount] = useState(1)
   const handleCount = (value: number) => (!(count === 0 && value === -1) ? setCount(count + value) : count)
   // const { title, defaultProductVariant, mainImage, body } = product
+
+  const redirectToSignIn = () => {
+    alert('SignIn required!')
+    // TODO: redirect back after the signIn
+    router.push('/auth/signIn')
+  }
+
+  const addTocart = async (_id: any) => {
+    // TODO: add product id to fireStore
+    throw new Error('Function not implemented.')
+  }
+
+  const purchase = async (_id: any) => {
+    // TODO: add product id to fireStore
+    throw new Error('Function not implemented.')
+  }
 
   // for btn-like
   const [selectedLike, setSelectedLike] = useState(false)
@@ -130,7 +150,7 @@ function ProductPage({ product }: { product: Product }) {
                   <strong className="mr-1">1,034</strong>리뷰
                 </a>
               </div>
-              {product && product.slug?.current && (
+              {user && product && product.slug?.current && (
                 <div className="flex">
                   <FacebookShareButton url={`${shareUrl}/products/${product.slug}`} quote={product?.title} className="">
                     <FacebookIcon size={24} round />
@@ -203,13 +223,25 @@ function ProductPage({ product }: { product: Product }) {
                 </div>
               </div>
               <div className="flex mt-4 h-12">
-                <button type="button" className="mr-1 px-2" onClick={() => setSelectedLike(!selectedLike)}>
+                <button
+                  type="button"
+                  className="mr-1 px-2"
+                  onClick={() => (user ? setSelectedLike(!selectedLike) : redirectToSignIn())}
+                >
                   <Icon className={selectedLike ? 'text-red-600 transition-all' : 'transition-all'}>favorite</Icon>
                 </button>
-                <button type="button" className="flex-1 border border-blue-600 text-blue-600">
+                <button
+                  type="button"
+                  className="flex-1 border border-blue-600 text-blue-600"
+                  onClick={() => (user ? addTocart(product._id) : redirectToSignIn())}
+                >
                   장바구니 담기
                 </button>
-                <button type="button" className="flex-1 bg-blue-600 text-white">
+                <button
+                  type="button"
+                  className="flex-1 bg-blue-600 text-white"
+                  onClick={() => (user ? purchase(product._id) : redirectToSignIn())}
+                >
                   바로구매
                 </button>
               </div>
@@ -305,7 +337,7 @@ function ProductPage({ product }: { product: Product }) {
               <button
                 type="button"
                 className="flex items-center border border-black p-1 hover:text-white hover:bg-black"
-                onClick={handleWriteReview}
+                onClick={() => (user ? handleWriteReview : redirectToSignIn())}
               >
                 <Icon className="text-base">create</Icon>
                 <span className="text-sm ml-1">후기 작성하기</span>
