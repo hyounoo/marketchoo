@@ -127,9 +127,11 @@ export default function Header() {
             <Icon>menu</Icon>
           </IconButton>
           <Link href="/">
-            <a className="text-3xl font-semibold leading-none">
-              <img src="/images/logo_120.svg" width={60} height={60} alt="MarketChoo" />
-            </a>
+            <h1>
+              <a className="text-3xl font-semibold leading-none">
+                <img src="/images/logo_120.svg" width={60} height={60} alt="MarketChoo" />
+              </a>
+            </h1>
           </Link>
 
           <div className="overflow w-8 h-0"></div>
