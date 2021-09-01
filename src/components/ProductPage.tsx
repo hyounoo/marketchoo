@@ -132,9 +132,6 @@ function ProductPage({ product }: { product: Product }) {
               </div>
               {product && product.slug?.current && (
                 <div className="flex">
-                  <p>
-                    ShareUrl: {shareUrl}/products/{product ? product.slug?.current : ''}
-                  </p>
                   <FacebookShareButton url={`${shareUrl}/products/${product.slug}`} quote={product?.title} className="">
                     <FacebookIcon size={24} round />
                   </FacebookShareButton>
