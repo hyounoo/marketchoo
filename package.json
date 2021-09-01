@@ -33,7 +33,7 @@
     "react-firebaseui": "^5.0.2",
     "react-intersection-observer": "^8.32.1",
     "react-share": "^4.4.0",
-    "react-use": "^17.2.4",
+    "react-use": "^17.3.1",
     "remark": "^14.0.1",
     "remark-html": "^14.0.0",
     "yup": "^0.32.9"
