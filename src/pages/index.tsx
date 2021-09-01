@@ -31,7 +31,7 @@ export default function Home({ productsData, preview }: { productsData: any; pre
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <section className="mt-6 mb-6">
+      <section className="mb-6">
         <ProductPage products={products} />
       </section>
     </Layout>
