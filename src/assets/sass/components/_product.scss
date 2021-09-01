@@ -124,6 +124,39 @@
 }
 
 
+// for Dialog
+.dialog-buynow {
+  .MuiDialog-paper {
+    width: 100%;
+    max-width: 520px;
+  }
+  .btn-copy-url {
+    display: flex;
+    // justify-content: flex-end;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    // max-width: 500px;
+    // font-size: 12px;
+
+    &::after {
+      content: "";
+      display: block;
+      width: 40px;
+      height: 40px;
+      background: url(data:image/webp;base64,UklGRtIAAABXRUJQVlA4WAoAAAAQAAAATwAATwAAQUxQSFwAAAABJyAQSOFmFxERg6JIkho04ICtk3AKuPOvipzDJ6L/E2D+c4eoreU1SsNgBKUemaBfEgdAGICt5TVKw2AEpR6ZoD8/DEgbqqpjYQC2CTKVJ8YISj2NDsMhamt92VZQOCBQAAAAUAUAnQEqUABQAD5tMJRGpCMiISuIAIANiWkAAFjm7xMyalSdQhKjC2LVrPqB5kYaDayAAP77nMDz//4dIBI/qB///b+6z//iHQA6PupoAAA=) 0 0/cover no-repeat;
+    }
+    .value {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      padding-left: 10px;
+      max-width: calc(100% - 40px);
+      height: 20px;
+      line-height: 20px;
+    }
+  }
+}
+
 @media (min-width: 640px) {
 
 .product {

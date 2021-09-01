@@ -1,9 +1,9 @@
-import { useState } from 'react'
+import { Fragment, useState } from 'react'
 import firebase from '../firebase'
 import { urlFor, PortableText, getClient } from '../lib/sanity'
 import { Card, CardContent, Icon, Typography, TextareaAutosize } from '@material-ui/core'
 import { MenuItem, FormControl, Select, Snackbar } from '@material-ui/core'
-import { Dialog, DialogActions, DialogContent } from '@material-ui/core'
+import { Dialog, DialogActions, DialogContent, DialogTitle } from '@material-ui/core'
 import { Alert, Rating } from '@material-ui/lab'
 import { FacebookShareButton, TwitterShareButton, FacebookIcon, TwitterIcon } from "react-share"
 import { number } from 'yup'
@@ -11,6 +11,7 @@ import clsx from 'clsx'
 import { InView } from 'react-intersection-observer'
 import { useAuthState } from 'react-firebase-hooks/auth'
 import router from 'next/router'
+const clipboardCopy = require('clipboard-copy')
 
 type Product = {
   _id: any
@@ -42,9 +43,25 @@ function ProductPage({ product }: { product: Product }) {
     throw new Error('Function not implemented.')
   }
 
+  // for 바로구매
+  const [openBuyNow, setOpenBuyNow] = useState(false)
+  const [isCopiedUrl, setIsCopiedCode] = useState(false)
   const purchase = async (_id: any) => {
+    // open dialog
+    setOpenBuyNow(true)
+
     // TODO: add product id to fireStore
-    throw new Error('Function not implemented.')
+    // throw new Error('Function not implemented.')
+  }
+  const handleCloseBuyNow = () => {
+    setOpenBuyNow(false)
+  }
+  const copyToClipboard = () => {
+    clipboardCopy('copied URL string~~~');
+    setIsCopiedCode(true)
+  }
+  const handleCloseSnackbar = () => {
+    setIsCopiedCode(false)
   }
 
   // for btn-like
@@ -624,6 +641,52 @@ function ProductPage({ product }: { product: Product }) {
           <div className="my-4">가을하늘 공활한데 높고 구름없이 밝은달은 우리가슴 일편 단심일세</div>
         </div>
       </InView>
+
+      {/* for Dialog */}
+      <Dialog className="dialog-buynow" open={openBuyNow}>
+        <DialogTitle disableTypography className="flex justify-between m-0 pd-2">
+          <Typography variant="h6">상품 배송 받기</Typography>
+          <button type="button" aria-label="close" className="-mr-2 text-gray-500" onClick={handleCloseBuyNow}>
+            <Icon className="block lg:text-4xl">close</Icon>
+          </button>
+        </DialogTitle>
+        <DialogContent className="" dividers>
+          <Typography className="text-center" gutterBottom>
+            마켓추의 상품을 배달해드립니다.<br />
+            마음껏 공유해주세요!
+          </Typography>
+          <div className="mt-3 mb-4">
+            <button type="button" id="btnCopyCode" className="btn-copy-url text-white text-xs lg:text-base bg-blue-600" onClick={copyToClipboard}>
+              <span className="value">https://www.marketchoo.com/products/abcd-asdf-asdf</span>
+            </button>
+          </div>
+          <div className="flex justify-center">
+            <FacebookShareButton url={`${shareUrl}/products/${product.slug}`} quote={product?.title} className="">
+              <FacebookIcon size={48} round />
+            </FacebookShareButton>
+            <TwitterShareButton url={`${shareUrl}/products/${product.slug}`} className="ml-2">
+              <TwitterIcon size={48} round />
+            </TwitterShareButton>
+          </div>
+        </DialogContent>
+      </Dialog>
+      <Snackbar
+        anchorOrigin={{
+          vertical: 'top',
+          horizontal: 'center',
+        }}
+        open={isCopiedUrl}
+        autoHideDuration={4000}
+        onClose={handleCloseSnackbar}
+        message="URL이 복사되었습니다."
+        action={
+          <Fragment>
+            <button type="button" aria-label="close" className="text-gray-500" onClick={handleCloseSnackbar}>
+              <Icon className="block">close</Icon>
+            </button>
+          </Fragment>
+        }
+      />
     </div>
   )
 }
