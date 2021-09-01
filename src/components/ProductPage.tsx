@@ -1,7 +1,9 @@
 import { useState } from 'react'
 import { urlFor, PortableText, getClient } from '../lib/sanity'
-import { Box, Card, CardContent, Icon, Typography, TextareaAutosize } from '@material-ui/core'
-import { Rating } from '@material-ui/lab'
+import { Card, CardContent, Icon, Typography, TextareaAutosize } from '@material-ui/core'
+import { MenuItem, FormControl, Select, Snackbar } from '@material-ui/core'
+import { Dialog, DialogActions, DialogContent } from '@material-ui/core'
+import { Alert, Rating } from '@material-ui/lab'
 import { FacebookShareButton, TwitterShareButton, FacebookIcon, TwitterIcon } from "react-share"
 import { number } from 'yup'
 import clsx from 'clsx'
@@ -41,20 +43,43 @@ function ProductPage({ product }: { product: Product }) {
     4: 'face-08',
     4.5: 'face-09',
     5: 'face-10',
-    // 0: 'bad',
-    // 0.5: 'Useless',
-    // 1: 'Useless+',
-    // 1.5: 'Poor',
-    // 2: 'Poor+',
-    // 2.5: 'Ok',
-    // 3: 'Ok+',
-    // 3.5: 'Good',
-    // 4: 'Good+',
-    // 4.5: 'Excellent',
-    // 5: 'Excellent+',
   }
   const [rateValue, setRateValue] = useState<number | null>(0)
   const [hover, setHover] = useState(-1)
+
+  // for Dialog
+  const [openDialog, setOpenDialog] = useState(false)
+  const [dialogType, setDialogType] = useState('')
+  const handleClickReport = () => {
+    setDialogType('report');
+    setTimeout(() => {
+      setOpenDialog(true);
+    }, 100);
+  };
+  const handleCloseDialog = () => {
+    setOpenDialog(false);
+    setTimeout(() => {
+      setDialogType('');
+    }, 100);
+  };
+  const handleClickDelete = () => {
+    setDialogType('delete');
+    setTimeout(() => {
+      setOpenDialog(true);
+    }, 100);
+  };
+  const handleCloseDelete = () => {
+    setOpenDialog(false);
+    setTimeout(() => {
+      setDialogType('');
+    }, 100);
+  };
+
+  // for Sorting Review
+  const [sortReview, setSortReview] = useState('recent')
+  const handleChangeSortReivew = (ev: React.ChangeEvent<{ value: unknown }>) => {
+    setSortReview(ev.target.value as string);
+  };
 
   // for Review
   const [activeWriteReview, setActiveWriteReview] = useState(false)
@@ -224,7 +249,7 @@ function ProductPage({ product }: { product: Product }) {
       </ul>
 
       {/* 상품상세 */}
-      <InView as="section" threshold={0.1} onChange={handleIntersectionTab} id="productDetail" className="section mt-20 lg:pt-12">
+      <InView as="section" threshold={0.1} onChange={handleIntersectionTab} id="productDetail" className="section lg:pt-12">
         <div className="section__inner">
           <h3 className="title text-lg">상품상세</h3>
           <div className="my-4">동해물과 백두산이 마르고 닳도록 하느님이 보우하사 우리나라 만세</div>
@@ -264,6 +289,23 @@ function ProductPage({ product }: { product: Product }) {
         </div>
       </InView>
 
+      {/* <Dialog open={openDialog} onClose={handleCloseDialog}> */}
+      <Dialog open={openDialog}>
+        <DialogContent className="p-4 text-center">
+          <p className={dialogType === 'delete' ? "hidden" : ""}>고객님의 신고가 접수되었습니다.</p>
+          <p className={dialogType === 'report' ? "hidden" : ""}>고객님께서 작성하신 후기가 삭제됩니다.<br />정말 삭제 하시겠습니까?</p>
+        </DialogContent>
+        <DialogActions className="flex justify-center pb-4">
+          <div className={dialogType === 'report' ? "hidden" : ""}>
+            <button type="button" className="rounded bg-blue-400 text-white text-sm px-4 py-1" onClick={handleCloseDialog}>취소</button>
+            <button type="button" className="ml-2 rounded bg-blue-600 text-white text-sm px-4 py-1" onClick={handleCloseDialog}>확인</button>
+          </div>
+          <div className={dialogType === 'delete' ? "hidden" : ""}>
+            <button type="button" className="rounded bg-blue-600 text-white text-sm px-4 py-1" onClick={handleCloseDialog}>확인</button>
+          </div>
+        </DialogActions>
+      </Dialog>
+
       {/* 상품후기 */}
       <InView as="section" threshold={0.5} onChange={handleIntersectionTab} id="productReview" className="section mt-20 lg:pt-12">
         <div className="section__inner">
@@ -271,14 +313,14 @@ function ProductPage({ product }: { product: Product }) {
             <div>상품후기<span className="ml-1 text-xs font-light">(1,306건)</span></div>
 
             {/* 아래 버튼은 로그인 사용자 또는 후기 작성권한이 있는 경우 노출 */}
-            <div className={activeWriteReview ? "hidden" : ""}>
-              <button
-                type="button"
+            {/* <div className={activeWriteReview ? "hidden" : ""}> */}
+            <div>
+              <a href="#formWriteComment"
                 className="flex items-center border border-black p-1 hover:text-white hover:bg-black"
                 onClick={handleWriteReview}>
                 <Icon className="text-base">create</Icon>
-                <span className="text-sm ml-1">후기 작성하기</span>
-              </button>
+                <span className="text-sm ml-1 font-normal">후기 작성하기</span>
+              </a>
             </div>
           </h3>
           <div className="wrap-rating flex flex-col justify-center items-center border-b border-black h-32">
@@ -292,16 +334,179 @@ function ProductPage({ product }: { product: Product }) {
             </div>
           </div>
 
-          <form className={clsx(!activeWriteReview && "hidden", "flex flex-wrap flex-col lg:flex-row lg:mt-4")}>
+          <div className="sort-comment flex justify-between mt-8">
+            <div aria-label="left"></div>
+            <div aria-label="right">
+              <FormControl variant="outlined">
+                <Select
+                  className="select-sort-review border border-black text-sm"
+                  id="selectSortReview"
+                  value={sortReview}
+                  onChange={handleChangeSortReivew}>
+                  <MenuItem className="text-sm" value="recent">최신순</MenuItem>
+                  <MenuItem className="text-sm" value="high">평점&#8593;</MenuItem>
+                  <MenuItem className="text-sm" value="low">평점&#8595;</MenuItem>
+                </Select>
+              </FormControl>
+            </div>
+          </div>
+
+          <ul className="list-comment">
+            <li className="list-comment__item">
+              <div className="flex justify-between mb-2">
+                <div aria-label="left">
+                  <div className="text-blue-600">user-nick-name</div>
+                  <div className="flex items-center">
+                    <Rating size="small" name="read-only" precision={0.5} value={3.5} readOnly />
+                    <span className="ml-2 text-gray-400 text-sm">2021.09.03</span>
+                  </div>
+                </div>
+                <div aria-label="right" className="flex items-center">
+                  {/* 다른 사람이 작성한 글인 경우(기본값) */}
+                  <button type="button" aria-label="신고" className="btn-report flex items-center ml-1 rounded bg-blue-600 text-white p-1 xl:translate-x-10" onClick={handleClickReport}>
+                    <Icon className="text-md lg:text-base">report_gmailerrorred</Icon>
+                  </button>
+                </div>
+              </div>
+              <p className="break-words">ㅋㅋㅋㅋ 이거 대박이네요 ㅋㅋㅋㅋ 이거 대박이네요 ㅋㅋㅋㅋ 이거 대박이네요 ㅋㅋㅋㅋ 이거 대박이네요 ㅋㅋㅋㅋ 이거 대박이네요 ㅋㅋㅋㅋ 이거 대박이네요 </p>
+            </li>
+            <li className="list-comment__item">
+              <div className="flex justify-between mb-2">
+                <div aria-label="left">
+                  <div className="text-blue-600">사용자닉네임</div>
+                  <div className="flex items-center">
+                    <Rating size="small" name="read-only" precision={0.5} value={4.5} readOnly />
+                    <span className="ml-2 text-gray-400 text-sm">2021.09.03</span>
+                  </div>
+                </div>
+                <div aria-label="right" className="flex items-center">
+                  {/* 사용자 본인이 작성한 글인 경우(수정버튼은 해당 기능을 지원할 경우만 사용해주세요) */}
+                  <button type="button" aria-label="수정" className="flex items-center ml-2 rounded bg-blue-600 text-white p-1">
+                    <Icon className="text-md lg:text-base">edit</Icon>
+                  </button>
+                  <button type="button" aria-label="삭제" className="flex items-center ml-2 rounded bg-blue-600 text-white p-1" onClick={handleClickDelete}>
+                    <Icon className="text-md lg:text-base">delete</Icon>
+                  </button>
+                </div>
+              </div>
+              <p className="break-words">오오! 바로 공유들어갑니다 ㅎㅎ 오오! 바로 공유들어갑니다 ㅎㅎ 오오! 바로 공유들어갑니다 ㅎㅎ 오오! 바로 공유들어갑니다 ㅎㅎ 오오! 바로 공유들어갑니다 ㅎㅎ 오오! 바로 공유들어갑니다 ㅎㅎ 오오! 바로 공유들어갑니다 ㅎㅎ 오오! 바로 공유들어갑니다 ㅎㅎ</p>
+            </li>
+            <li className="list-comment__item">
+              <div className="flex justify-between mb-2">
+                <div aria-label="left">
+                  <div className="text-blue-600">user-nick-name</div>
+                  <div className="flex items-center">
+                    <Rating size="small" name="read-only" precision={0.5} value={2.5} readOnly />
+                    <span className="ml-2 text-gray-400 text-sm">2021.09.03</span>
+                  </div>
+                </div>
+                <div aria-label="right" className="flex items-center">
+                  {/* 다른 사람이 작성한 글인 경우(기본값) */}
+                  <button type="button" aria-label="신고" className="btn-report flex items-center ml-1 rounded bg-blue-600 text-white p-1 xl:translate-x-10" onClick={handleClickReport}>
+                    <Icon className="text-md lg:text-base">report_gmailerrorred</Icon>
+                  </button>
+                </div>
+              </div>
+              <p className="break-words">장난하나?? 이게 뭐라고 다들 이렇게 난리법석?? 장난하나?? 이게 뭐라고 다들 이렇게 난리법석?? 장난하나?? 이게 뭐라고 다들 이렇게 난리법석?? </p>
+            </li>
+            <li className="list-comment__item">
+              <div className="flex justify-between mb-2">
+                <div aria-label="left">
+                  <div className="text-blue-600">사용자닉네임</div>
+                  <div className="flex items-center">
+                    <Rating size="small" name="read-only" precision={0.5} value={5} readOnly />
+                    <span className="ml-2 text-gray-400 text-sm">2021.09.03</span>
+                  </div>
+                </div>
+                <div aria-label="right" className="flex items-center">
+                  <button type="button" aria-label="신고" className="btn-report flex items-center ml-1 rounded bg-blue-600 text-white p-1 xl:translate-x-10" onClick={handleClickReport}>
+                    <Icon className="text-md lg:text-base">report_gmailerrorred</Icon>
+                  </button>
+                </div>
+              </div>
+              <p className="break-words">오오! 바로 공유들어갑니다 ㅎㅎ 오오! 바로 공유들어갑니다 ㅎㅎ 오오! 바로 공유들어갑니다 ㅎㅎ 오오! 바로 공유들어갑니다 ㅎㅎ 오오! 바로 공유들어갑니다 ㅎㅎ 오오! 바로 공유들어갑니다 ㅎㅎ 오오! 바로 공유들어갑니다 ㅎㅎ 오오! 바로 공유들어갑니다 ㅎㅎ 오오! 바로 공유들어갑니다 ㅎㅎ 오오! 바로 공유들어갑니다 ㅎㅎ 오오! 바로 공유들어갑니다 ㅎㅎ 오오! 바로 공유들어갑니다 ㅎㅎ 오오! 바로 공유들어갑니다 ㅎㅎ 오오! 바로 공유들어갑니다 ㅎㅎ 오오! 바로 공유들어갑니다 ㅎㅎ 오오! 바로 공유들어갑니다 ㅎㅎ 오오! 바로 공유들어갑니다 ㅎㅎ 오오! 바로 공유들어갑니다 ㅎㅎ 오오! 바로 공유들어갑니다 ㅎㅎ 오오! 바로 공유들어갑니다 ㅎㅎ 오오! 바로 공유들어갑니다 ㅎㅎ 오오! 바로 공유들어갑니다 ㅎㅎ</p>
+            </li>
+            <li className="list-comment__item">
+              <div className="flex justify-between mb-2">
+                <div aria-label="left">
+                  <div className="text-blue-600">user-nick-name</div>
+                  <div className="flex items-center">
+                    <Rating size="small" name="read-only" precision={0.5} value={5} readOnly />
+                    <span className="ml-2 text-gray-400 text-sm">2021.09.03</span>
+                  </div>
+                </div>
+                <div aria-label="right" className="flex items-center">
+                  <button type="button" aria-label="신고" className="btn-report flex items-center ml-1 rounded bg-blue-600 text-white p-1 xl:translate-x-10" onClick={handleClickReport}>
+                    <Icon className="text-md lg:text-base">report_gmailerrorred</Icon>
+                  </button>
+                </div>
+              </div>
+              <p className="break-words">ㅋㅋㅋㅋ 이거 대박이네요 ㅋㅋㅋㅋ 이거 대박이네요 ㅋㅋㅋㅋ 이거 대박이네요 ㅋㅋㅋㅋ 이거 대박이네요 ㅋㅋㅋㅋ 이거 대박이네요 ㅋㅋㅋㅋ 이거 대박이네요 </p>
+            </li>
+            <li className="list-comment__item">
+              <div className="flex justify-between mb-2">
+                <div aria-label="left">
+                  <div className="text-blue-600">사용자닉네임</div>
+                  <div className="flex items-center">
+                    <Rating size="small" name="read-only" precision={0.5} value={4} readOnly />
+                    <span className="ml-2 text-gray-400 text-sm">2021.09.03</span>
+                  </div>
+                </div>
+                <div aria-label="right" className="flex items-center">
+                  <button type="button" aria-label="신고" className="btn-report flex items-center ml-1 rounded bg-blue-600 text-white p-1 xl:translate-x-10" onClick={handleClickReport}>
+                    <Icon className="text-md lg:text-base">report_gmailerrorred</Icon>
+                  </button>
+                </div>
+              </div>
+              <p className="break-words">오오! 바로 공유들어갑니다 ㅎㅎ 오오! 바로 공유들어갑니다 ㅎㅎ 오오! 바로 공유들어갑니다 ㅎㅎ 오오! 바로 공유들어갑니다 ㅎㅎ 오오! 바로 공유들어갑니다 ㅎㅎ 오오! 바로 공유들어갑니다 ㅎㅎ 오오! 바로 공유들어갑니다 ㅎㅎ 오오! 바로 공유들어갑니다 ㅎㅎ</p>
+            </li>
+            <li className="list-comment__item">
+              <div className="flex justify-between mb-2">
+                <div aria-label="left">
+                  <div className="text-blue-600">usernickname</div>
+                  <div className="flex items-center">
+                    <Rating size="small" name="read-only" precision={0.5} value={3.5} readOnly />
+                    <span className="ml-2 text-gray-400 text-sm">2021.09.02</span>
+                  </div>
+                </div>
+                <div aria-label="right" className="flex items-center">
+                  <button type="button" aria-label="신고" className="btn-report flex items-center ml-1 rounded bg-blue-600 text-white p-1 xl:translate-x-10" onClick={handleClickReport}>
+                    <Icon className="text-md lg:text-base">report_gmailerrorred</Icon>
+                  </button>
+                </div>
+              </div>
+              <p className="break-words">saasdfkljadjkls(#*$& asdfjklaldfjkssafjdfjklalfjdslfkjasdlfkjsdflkj adfklsjasdfjklsadfkljsadfkljsadfkljsdafkljasdljaslsflfasfjsdklfjasd</p>
+            </li>
+            <li className="list-comment__item">
+              <div className="flex justify-between mb-2">
+                <div aria-label="left">
+                  <div className="text-blue-600">user-nick-name</div>
+                  <div className="flex items-center">
+                    <Rating size="small" name="read-only" precision={0.5} value={5} readOnly />
+                    <span className="ml-2 text-gray-400 text-sm">2021.09.02</span>
+                  </div>
+                </div>
+                <div aria-label="right" className="flex items-center">
+                  <button type="button" aria-label="신고" className="btn-report flex items-center ml-1 rounded bg-blue-600 text-white p-1 xl:translate-x-10" onClick={handleClickReport}>
+                    <Icon className="text-md lg:text-base">report_gmailerrorred</Icon>
+                  </button>
+                </div>
+              </div>
+              <p className="break-words">ㅋㅋㅋㅋ 이거 대박이네요 ㅋㅋㅋㅋ 이거 대박이네요 ㅋㅋㅋㅋ 이거 대박이네요 ㅋㅋㅋㅋ 이거 대박이네요 ㅋㅋㅋㅋ 이거 대박이네요 ㅋㅋㅋㅋ 이거 대박이네요 </p>
+            </li>
+          </ul>
+
+          {/* <form className={clsx(!activeWriteReview && "hidden", "flex flex-wrap flex-col lg:flex-row lg:mt-4")}> */}
+          <form id="formWriteComment" className="form-write-comment flex flex-wrap flex-col lg:flex-row">
             <div className="flex-1">
               <TextareaAutosize 
                 id="textareaReview"
-                className="flex-1 w-full border border-black border-t-0 lg:border-t rounded-none p-2 shadow-none outline-none appearance-none"
+                className="flex-1 w-full border border-black rounded-none p-2 shadow-none outline-none appearance-none"
                 maxRows={10}
                 minRows={3}
-                maxLength={300}
+                maxLength={200}
                 aria-label="후기 작성 입력란"
-                placeholder="상품 후기를 작성해주세요 :)" />
+                placeholder="상품 후기를 자유롭게 작성해주세요(200자 이내)" />
             </div>
             <div className="flex justify-center items-center px-4">
               <div className="flex flex-col justify-center items-center">
@@ -326,27 +531,9 @@ function ProductPage({ product }: { product: Product }) {
 
           <div className="flex justify-center mt-4 h-12">
             {/* 버튼 비활성화 - disabled 어트리뷰트 추가 */}
-            {/* <button disabled type="button" className="flex-1 lg:flex-initial w-40 bg-blue-600 text-white">등록</button> */}
-            <button type="button" className="flex-1 lg:flex-initial w-40 bg-blue-600 text-white">등록</button>
+            {/* <button disabled type="button" className="flex-1 lg:flex-initial w-40 bg-blue-600 text-white">상품후기 등록</button> */}
+            <button type="button" className="flex-1 lg:flex-initial w-40 bg-blue-600 text-white">상품후기 등록</button>
           </div>
-
-          <div className="my-4">남산위에 저소나무 철갑을 두른듯 바람서리 불변함은 우리 기상일세</div>
-          <div className="my-4">남산위에 저소나무 철갑을 두른듯 바람서리 불변함은 우리 기상일세</div>
-          <div className="my-4">남산위에 저소나무 철갑을 두른듯 바람서리 불변함은 우리 기상일세</div>
-          <div className="my-4">남산위에 저소나무 철갑을 두른듯 바람서리 불변함은 우리 기상일세</div>
-          <div className="my-4">남산위에 저소나무 철갑을 두른듯 바람서리 불변함은 우리 기상일세</div>
-          <div className="my-4">남산위에 저소나무 철갑을 두른듯 바람서리 불변함은 우리 기상일세</div>
-          <div className="my-4">남산위에 저소나무 철갑을 두른듯 바람서리 불변함은 우리 기상일세</div>
-          <div className="my-4">남산위에 저소나무 철갑을 두른듯 바람서리 불변함은 우리 기상일세</div>
-          <div className="my-4">남산위에 저소나무 철갑을 두른듯 바람서리 불변함은 우리 기상일세</div>
-          <div className="my-4">남산위에 저소나무 철갑을 두른듯 바람서리 불변함은 우리 기상일세</div>
-          <div className="my-4">남산위에 저소나무 철갑을 두른듯 바람서리 불변함은 우리 기상일세</div>
-          <div className="my-4">남산위에 저소나무 철갑을 두른듯 바람서리 불변함은 우리 기상일세</div>
-          <div className="my-4">남산위에 저소나무 철갑을 두른듯 바람서리 불변함은 우리 기상일세</div>
-          <div className="my-4">남산위에 저소나무 철갑을 두른듯 바람서리 불변함은 우리 기상일세</div>
-          <div className="my-4">남산위에 저소나무 철갑을 두른듯 바람서리 불변함은 우리 기상일세</div>
-          <div className="my-4">남산위에 저소나무 철갑을 두른듯 바람서리 불변함은 우리 기상일세</div>
-          <div className="my-4">남산위에 저소나무 철갑을 두른듯 바람서리 불변함은 우리 기상일세</div>
         </div>
       </InView>
 

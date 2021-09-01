@@ -83,6 +83,44 @@
       background-image: url(/images/temp/10.jpg);
     }
   }
+
+  .form-write-comment {
+    padding-top: calc(var(--header-height) + 46px);
+  }
+
+  .select-sort-review {
+    .MuiSelect-select {
+      padding-top: 8px;
+      padding-bottom: 8px;
+
+    }
+    > fieldset {
+      border-width: 0 !important;
+    }
+  }
+
+  .list-comment {
+    &__item {
+      overflow: hidden;
+      margin-top: 12px;
+      padding-top: 12px;
+      border-top: 1px solid rgba(#000, .3);
+
+      &:first-of-type {
+        margin-top: 0;
+        border-top-width: 0;
+      }
+      .btn-report {
+        // transform: translateX(40px);
+        transition: transform 300ms ease;
+      }
+      &:hover {
+        .btn-report {
+          transform: translateX(0);
+        }
+      }
+    }
+  }
 }
 
 
