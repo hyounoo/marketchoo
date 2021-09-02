@@ -25,7 +25,7 @@ export default function Home({ allPosts, preview }: { allPosts: any; preview: bo
         <title>{siteTitle}</title>
       </Head>
       {heroPost && <TopPost post={heroPost} />}
-      {morePosts.length > 0 && <MoreStories posts={allPosts} />}
+      {morePosts.length > 0 && <MoreStories posts={morePosts} />}
     </Layout>
   )
 }
