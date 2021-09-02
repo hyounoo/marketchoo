@@ -31,8 +31,8 @@ export default function Home({ allPosts, preview }: { allPosts: any; preview: bo
 }
 
 export const getStaticProps: GetStaticProps = async ({ params = {}, preview = false }) => {
-  const allPosts = overlayDrafts(await getClient(preview).fetch(indexQuery))
-  log('allPosts: ', allPosts)
+  const allPosts = await getClient(preview).fetch(indexQuery)
+  // log('allPosts: ', allPosts)
 
   return {
     props: { allPosts, preview }
