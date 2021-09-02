@@ -49,3 +49,4 @@ npm run start
 [Our roadmap](roadmap.md) communicates features currently in development (private preview) and on-going priorities for extending the scope of Market Choo. It will continue to evolve based on market changes and customer feedback, so please note that the plans outlined here are not exhaustive or guaranteed. We welcome your feedback on the roadmap.
 
 A project view of the roadmap is [also available here](https://github.com/hyounoo/marketchoo/projects/1).
+
