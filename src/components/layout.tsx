@@ -26,8 +26,8 @@ export default function Layout({ children, preview }: { children: React.ReactNod
         <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
       </Head>
       <Header></Header>
+      {preview && <PreviewAlert />}
       <Container id="container" className="container">
-        {preview && <PreviewAlert />}
         <main id="contents" className="min-h-screen contents py-4">
           {children}
         </main>
