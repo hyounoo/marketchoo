@@ -1,60 +1,40 @@
 import { GetStaticProps } from 'next'
-import Head from 'next/head'
-import Link from 'next/link'
-import Layout, { siteTitle } from '../components/layout'
-import Date from '../components/Date'
-import { getSortedArticlesData } from '../lib/articles'
-import { getClient, usePreviewSubscription } from '../lib/sanity'
+import { indexQuery } from '../lib/queries'
+import { getClient, overlayDrafts } from '../lib/sanity.server'
 import { useRouter } from 'next/router'
 import Error from 'next/error'
-import ProductPage from '../components/ProductsPage'
+import { log } from '../utils/log'
+import Layout, { siteTitle } from '../components/layout'
+import React from 'react'
+import Head from 'next/head'
+import TopPost from '../components/Posts/TopPost'
+import MoreStories from '../components/Posts/MoreStories'
 
-const query = `//groq
-  *[_type == "product" && defined(slug.current)]
-`
-
-export default function Home({ productsData, preview }: { productsData: any; preview: boolean }) {
+export default function Home({ allPosts, preview }: { allPosts: any; preview: boolean }) {
   const router = useRouter()
-  const { data: products } = usePreviewSubscription(query, {
-    initialData: productsData,
-    enabled: preview || router.query.preview !== null
-  })
+  const heroPost = allPosts[0]
+  const morePosts = allPosts.slice(1)
 
-  if (!router.isFallback && !productsData) {
+  if (!router.isFallback && !allPosts) {
     return <Error statusCode={404} />
   }
 
   return (
-    <Layout home>
+    <Layout>
       <Head>
         <title>{siteTitle}</title>
-        <link rel="icon" href="/favicon.ico" />
       </Head>
-
-      <h1 className="text-2xl lg:text-4xl font-bold">Welcome to {siteTitle}</h1>
-      <section className="mt-6 mb-6">
-        <ProductPage products={products} />
-      </section>
+      {heroPost && <TopPost post={heroPost} />}
+      {morePosts.length > 0 && <MoreStories posts={allPosts} />}
     </Layout>
   )
 }
 
 export const getStaticProps: GetStaticProps = async ({ params = {}, preview = false }) => {
-  const productsData = await getClient(preview).fetch(query)
+  const allPosts = overlayDrafts(await getClient(preview).fetch(indexQuery))
+  log('allPosts: ', allPosts)
 
   return {
-    props: {
-      preview,
-      productsData
-    }
+    props: { allPosts, preview }
   }
 }
-
-// export const getStaticProps: GetStaticProps = async () => {
-//   const allArticlesData = getSortedArticlesData()
-//   return {
-//     props: {
-//       allArticlesData
-//     }
-//   }
-// }

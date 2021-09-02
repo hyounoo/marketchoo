@@ -18,11 +18,13 @@ import {
   ListItemIcon,
   ListItemText,
   Icon,
-  Button
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle
 } from '@material-ui/core'
-
-// Below for Dialog
-import { Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@material-ui/core'
 
 const drawerWidth = 280
 const useStyles = makeStyles((theme: Theme) =>
@@ -127,9 +129,11 @@ export default function Header() {
             <Icon>menu</Icon>
           </IconButton>
           <Link href="/">
-            <a className="text-3xl font-semibold leading-none">
-              <img src="/images/logo_120.svg" width={60} height={60} alt="MarketChoo" />
-            </a>
+            <h1>
+              <a className="text-3xl font-semibold leading-none">
+                <img src="/images/logo_120.svg" width={60} height={60} alt="MarketChoo" />
+              </a>
+            </h1>
           </Link>
 
           <div className="overflow w-8 h-0"></div>
@@ -242,7 +246,7 @@ export default function Header() {
                 <DialogTitle id="alert-dialog-title">CHOO 포인트 안내</DialogTitle>
                 <DialogContent dividers>
                   <DialogContentText id="alert-dialog-description">
-                    <ul>
+                    <ul className="list-disc list-outside text-black text-xs lg:text-sm lg:ml-4">
                       <li>
                         CHOO 포인트는 실제 상품구매 등에 사용할 수 있는 포인트가 아니며, 추마켓에서 진행하는 이벤트 및
                         행사 참여 이외에는 사용하실 수 없습니다.

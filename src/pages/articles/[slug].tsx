@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import React from 'react'
 import Layout from '../../components/layout'
-import Date from '../../components/Date'
+import DisplayDate from '../../components/DisplayDate'
 import { GetStaticPaths, GetStaticProps } from 'next'
 import { getAppArticleSlugs, getArticleData } from '../../lib/articles'
 
@@ -11,7 +11,7 @@ export default function Article({
   articleData: {
     slug: string
     title: string
-    date: string
+    date: Date
     contentHtml: string
   }
 }) {
@@ -24,7 +24,7 @@ export default function Article({
         <article>
           <h1 className="">{articleData.title}</h1>
           <div className="">
-            <Date dateString={articleData.date} />
+            <DisplayDate dateString={articleData.date.toString()} />
           </div>
           <div dangerouslySetInnerHTML={{ __html: articleData.contentHtml }} />
         </article>

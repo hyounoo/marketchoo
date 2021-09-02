@@ -11,34 +11,34 @@ const query = `//groq
 `
 
 export default function Products({ productsData, preview }: { productsData: any; preview: boolean }) {
-  const router = useRouter()
-  const { data: products } = usePreviewSubscription(query, {
-    initialData: productsData,
-    enabled: preview || router.query.preview !== null
-  })
+  // const router = useRouter()
+  // const { data: products } = usePreviewSubscription(query, {
+  //   initialData: productsData,
+  //   enabled: preview || router.query.preview !== null
+  // })
 
-  if (!router.isFallback && !productsData) {
-    return <Error statusCode={404} />
-  }
+  // if (!router.isFallback && !productsData) {
+  //   return <Error statusCode={404} />
+  // }
 
   return (
     <Layout>
-      <div className="flex flex-col items-center justify-center py-2">
+      {/* <div className="flex flex-col items-center justify-center py-2">
         <main className="flex flex-col items-center justify-center w-full flex-1 px-20 text-center">
           <ProductPage products={products} />
         </main>
-      </div>
+      </div> */}
     </Layout>
   )
 }
 
-export const getStaticProps: GetStaticProps = async ({ params = {}, preview = false }) => {
-  const productsData = await getClient(preview).fetch(query)
+// export const getStaticProps: GetStaticProps = async ({ params = {}, preview = false }) => {
+//   const productsData = await getClient(preview).fetch(query)
 
-  return {
-    props: {
-      preview,
-      productsData
-    }
-  }
-}
+//   return {
+//     props: {
+//       preview,
+//       productsData
+//     }
+//   }
+// }
