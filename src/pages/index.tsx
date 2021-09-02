@@ -31,8 +31,7 @@ export default function Home({ productsData, preview }: { productsData: any; pre
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <h1 className="text-2xl lg:text-4xl font-bold">Welcome to {siteTitle}</h1>
-      <section className="mt-6 mb-6">
+      <section className="mb-6">
         <ProductPage products={products} />
       </section>
     </Layout>
