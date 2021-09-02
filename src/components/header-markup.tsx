@@ -134,13 +134,13 @@ export default function Header() {
 
           <div className="overflow w-8 h-0"></div>
           <div className="hidden lg:flex absolute top-2 right-0 mr-6">
-            <Link href="/products">
+            <Link href="/posts">
               <a className="flex items-center text-white mr-6">
                 <Icon className="text-lg mr-2">shopify</Icon>
                 <span>상품</span>
               </a>
             </Link>
-            <Link href="/events">
+            <Link href="/">
               <a className="flex items-center text-white mr-6">
                 <Icon className="text-lg mr-2">event</Icon>
                 <span>이벤트</span>
@@ -277,7 +277,7 @@ export default function Header() {
               <ListItemIcon className="icon">
                 <Icon>shopify</Icon>
               </ListItemIcon>
-              <Link href="/products">
+              <Link href="/posts">
                 <ListItemText className="text" primary="상품" />
               </Link>
             </ListItem>
@@ -285,7 +285,7 @@ export default function Header() {
               <ListItemIcon className="icon">
                 <Icon>event</Icon>
               </ListItemIcon>
-              <Link href="/events">
+              <Link href="/">
                 <ListItemText className="text" primary="이벤트" />
               </Link>
             </ListItem>

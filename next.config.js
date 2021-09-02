@@ -5,4 +5,7 @@ module.exports = {
   reactStrictMode: true,
   trailingSlash: true,
   // assetPrefix: isProd ? 'https://cdn.marketchoo.com' : '',
+  images: {
+    domains: ['cdn.sanity.io'],
+  }
 }
