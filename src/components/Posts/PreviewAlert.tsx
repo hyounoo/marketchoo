@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import React from 'react'
 
 export default function PreviewAlert() {
@@ -6,10 +7,9 @@ export default function PreviewAlert() {
       <div className="py-2 text-center text-sm bg-red-400">
         <>
           This page is a preview.{' '}
-          <a href="/api/exit-preview" className="underline hover:text-cyan duration-200 transition-colors">
-            Click here
-          </a>{' '}
-          to exit preview mode.
+          <Link href="/api/exit-preview">
+            <a className="underline hover:text-cyan duration-200 transition-colors">Click here</a> to exit preview mode.
+          </Link>
         </>
       </div>
     </div>
