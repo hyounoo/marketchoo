@@ -11,8 +11,8 @@ export default function ProductReview() {
   const router = useRouter()
   const [user, loading, error] = useAuthState(firebase.auth())
 
-  const [rateValue, setRateValue] = useState<number | null>(0)
-  const [hover, setHover] = useState(-1)
+  const [rateValue, setRateValue] = useState<number>(0)
+  const [rateHover, setRateHover] = useState(-1)
 
   const redirectToSignIn = () => {
     alert('SignIn required!')
@@ -118,15 +118,17 @@ export default function ProductReview() {
                 size="large"
                 precision={0.5}
                 defaultValue={0}
-                onChange={(ev, newValue) => {
+                onChange={(ev, newValue: any) => {
                   setRateValue(newValue)
                 }}
                 onChangeActive={(ev, newHover) => {
-                  setHover(newHover)
+                  setRateHover(newHover)
                 }}
               />
             </div>
-            <div className={clsx('ml-4 face', ratingLabels[hover !== -1 ? hover : rateValue])}></div>
+            <div
+              className={clsx('ml-4 face', rateHover !== -1 ? ratingLabels[rateHover] : ratingLabels[rateValue])}
+            ></div>
           </div>
         </form>
 
