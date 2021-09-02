@@ -17,7 +17,7 @@ const postFields = `
   subTitle,
   content,
   productDetail,
-  productInfo
+  productInfo,
   date,
   coverImage,
   "slug": slug.current,
