@@ -126,13 +126,13 @@ export default function ProductReview() {
                 }}
               />
             </div>
-            {rateValue !== null && (
-              <div className={clsx('ml-4 face', ratingLabels[hover !== -1 ? hover : rateValue])}></div>
-            )}
+            <div className={clsx('ml-4 face', ratingLabels[hover !== -1 ? hover : rateValue])}></div>
           </div>
         </form>
 
         <div className="flex justify-center mt-4 h-12">
+          {/* 버튼 비활성화 - disabled 어트리뷰트 추가 */}
+          {/* <button disabled type="button" className="flex-1 lg:flex-initial w-40 bg-blue-600 text-white">등록</button> */}
           <button type="button" className="flex-1 lg:flex-initial w-40 bg-blue-600 text-white">
             등록
           </button>

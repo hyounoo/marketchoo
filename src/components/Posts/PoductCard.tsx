@@ -53,15 +53,22 @@ export default function PoductCard({
   // for btn-like
   const [selectedLike, setSelectedLike] = useState<boolean>(false)
 
+  // for 바로구매
+  const [openBuyNow, setOpenBuyNow] = useState(false)
+  const [isCopiedUrl, setIsCopiedCode] = useState(false)
+  const purchase = async (_id: any) => {
+    // open dialog
+    setOpenBuyNow(true)
+
+    // TODO: add product id to fireStore
+    // throw new Error('Function not implemented.')
+  }
+
   const addTocart = async (_id: any) => {
     // TODO: add product id to fireStore
     throw new Error('Function not implemented.')
   }
 
-  const purchase = async (_id: any) => {
-    // TODO: add product id to fireStore
-    throw new Error('Function not implemented.')
-  }
   return (
     <div className="mb-8 md:mb-16 sm:mx-0">
       <Card className="product-card mb-6 -mt-6 lg:mt-0 shadow-none lg:shadow-md">
