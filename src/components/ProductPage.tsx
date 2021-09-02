@@ -81,8 +81,8 @@ function ProductPage({ product }: { product: Product }) {
     4.5: 'face-09',
     5: 'face-10',
   }
-  const [rateValue, setRateValue] = useState<number | null>(0)
-  const [hover, setHover] = useState(-1)
+  const [rateValue, setRateValue] = useState(0)
+  const [rateHover, setRateHover] = useState(-1)
 
   // for Dialog
   const [openDialog, setOpenDialog] = useState(false)
@@ -593,15 +593,15 @@ function ProductPage({ product }: { product: Product }) {
                   size="large"
                   precision={0.5}
                   defaultValue={0}
-                  onChange={(ev, newValue) => {
+                  onChange={(ev, newValue: any) => {
                     setRateValue(newValue)
                   }}
-                  onChangeActive={(ev, newHover) => {
-                    setHover(newHover)
+                  onChangeActive={(ev, newHover: any) => {
+                    setRateHover(newHover)
                   }}
                 />
               </div>
-              <div className={clsx("ml-4 face", ratingLabels[hover !== -1 ? hover : rateValue])}></div>
+              <div className={clsx("ml-4 face", rateHover !== -1 ? ratingLabels[rateHover] : ratingLabels[rateValue])}></div>
             </div>
           </form>
 
